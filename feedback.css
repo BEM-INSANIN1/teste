@@ -1,0 +1,182 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(120deg, #f0f4ff, #e6e9ff);
+    color: #2c3e50;
+    line-height: 1.6;
+}
+
+/* Botão do Menu */
+.menu-toggle {
+    position: fixed;
+    top: 30px; /* Aumentei a distância para evitar sobreposição */
+    left: 20px;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    transition: background 0.3s ease;
+}
+
+.menu-toggle:hover {
+    background: linear-gradient(135deg, #5a0eb2, #1d63e2);
+}
+
+/* Menu */
+.menu {
+    position: fixed;
+    top: 60px; /* Ajuste para dar mais espaço ao botão */
+    left: -250px; /* Esconde o menu inicialmente */
+    width: 250px;
+    height: auto;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: white;
+    padding: 20px;
+    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.15);
+    transition: left 0.3s ease;
+    z-index: 999;
+    border-radius: 12px; /* Bordas arredondadas */
+}
+
+.menu a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    padding: 12px 20px;
+    border-radius: 8px;
+    transition: background 0.3s ease;
+}
+
+.menu a:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Container Principal */
+.container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Formulário de Feedback */
+.formulario {
+    width: 100%;
+    max-width: 600px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    margin: 20px 0;
+}
+
+.formulario textarea {
+    width: 100%;
+    height: 150px;
+    padding: 12px;
+    font-size: 1rem;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    resize: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.formulario textarea:focus {
+    border-color: #2575fc;
+    box-shadow: 0 0 8px rgba(37, 117, 252, 0.3);
+    outline: none;
+}
+
+.formulario button {
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: all 0.3s ease;
+}
+
+.formulario button:hover {
+    background: linear-gradient(135deg, #5a0eb2, #1d63e2);
+    transform: scale(1.05);
+}
+
+/* Mensagem de Confirmação */
+.mensagem {
+    font-size: 1.2rem;
+    margin-top: 20px;
+    color: #2575fc;
+}
+
+/* Lista de Feedbacks */
+.box {
+    width: 100%;
+    max-width: 600px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-top: 20px;
+    text-align: left;
+}
+
+.box p {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+/* Rodapé */
+footer {
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: auto;
+}
+
+footer p {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+/* Botão de Reset */
+.btn-reset {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: all 0.3s ease;
+    display: block;
+    margin: 20px auto;
+}
+
+.btn-reset:hover {
+    background-color: #c0392b;
+    transform: scale(1.05);
+}

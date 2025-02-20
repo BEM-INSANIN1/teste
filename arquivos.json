@@ -1,0 +1,31 @@
+{
+    "italiana": [
+      {
+        "title": "Culinária Italiana",
+        "description": "Deliciosas receitas italianas.",
+        "link": "/pdfs/Culinaria_Italiana.pdf"
+      }
+    ],
+    "brasileira": [
+      {
+        "title": "Culinária Brasileira",
+        "description": "Receitas brasileiras autênticas.",
+        "link": "/pdfs/Culinaria_Brasileira.pdf"
+      }
+    ],
+    "mexicana": [
+      {
+        "title": "Culinária Mexicana",
+        "description": "Sabores picantes e tradicionais.",
+        "link": "/pdfs/Culinaria_Mexicana.pdf"
+      }
+    ],
+    "japonesa": [
+      {
+        "title": "Guia de Culinária Japonesa",
+        "description": "Receitas de sushi e outros pratos japoneses.",
+        "link": "/pdfs/Guia_de_Culinaria_Japonesa_Revista_Online.pdf"
+      }
+    ]
+  }
+  

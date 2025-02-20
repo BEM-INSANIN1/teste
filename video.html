@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vídeo Especial</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Reset básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(120deg, #f0f4ff, #e6e9ff);
+            color: #2c3e50;
+            line-height: 1.6;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        /* Estilo do botão de menu */
+        .menu-toggle {
+            position: fixed;
+            top: 30px;
+            left: 20px;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            transition: background 0.3s ease;
+        }
+
+        .menu-toggle:hover {
+            background: linear-gradient(135deg, #5a0eb2, #1d63e2);
+        }
+
+        /* Menu */
+        .menu {
+            position: fixed;
+            top: 80px;
+            left: -250px;
+            width: 250px;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: white;
+            padding: 20px;
+            box-shadow: 4px 0 10px rgba(0, 0, 0, 0.15);
+            transition: left 0.3s ease;
+            z-index: 999;
+            border-radius: 12px;
+        }
+
+        .menu a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            padding: 12px 20px;
+            border-radius: 8px;
+            transition: background 0.3s ease;
+        }
+
+        .menu a:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Estilo do vídeo */
+        video {
+            width: 90%;
+            max-width: 900px;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        video:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Cabeçalho */
+        header {
+            text-align: center;
+            padding: 30px 20px;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: white;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 900px;
+            margin: 20px 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        header h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <button id="menu-toggle" class="menu-toggle">
+        <i class="fas fa-bars"></i> Menu
+    </button>
+
+    <div id="menu" class="menu">
+        <a href="/"><i class="fas fa-home"></i> Receitas Favoritas</a>
+        <a href="/feedback.html"><i class="fas fa-comment"></i> Enviar Feedback</a>
+        <a href="/quis.html"><i class="fas fa-question-circle"></i> Jogos</a>
+        <a href="/contagem_regre.html"><i class="fas fa-clock"></i> Contagem Regressiva</a>
+        <a href="/oraculo.html"><i class="fas fa-bolt"></i> Oráculo</a>
+        <a href="/video.html"><i class="fas fa-video"></i> Vídeo</a>
+    </div>
+
+    <header>
+        <h1>Memórias Especiais</h1>
+        <p>Essa música toda vez me faz lembrar da nossa relação</p>
+    </header>
+
+    <video controls>
+        <source src="images/video_dela.mp4" type="video/mp4">
+        Seu navegador não suporta o elemento de vídeo.
+    </video>
+
+    <header>
+        <h1>Outro Momento Especial</h1>
+        <p>Este vídeo também traz boas lembranças</p>
+    </header>
+
+    <video controls>
+        <source src="images/videoplayback.mp4" type="video/mp4">
+        Seu navegador não suporta o elemento de vídeo.
+    </video>
+
+    <script>
+        document.getElementById('menu-toggle').addEventListener('click', () => {
+            const menu = document.getElementById('menu');
+            menu.style.left = menu.style.left === '0px' ? '-250px' : '0px';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contagem Regressiva para o Aniversário da Ester!</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Reset básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(120deg, #f0f4ff, #e6e9ff);
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+
+        /* Botão do Menu */
+        .menu-toggle {
+            position: fixed;
+            top: 30px;
+            left: 20px;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            transition: background 0.3s ease;
+        }
+
+        .menu-toggle:hover {
+            background: linear-gradient(135deg, #5a0eb2, #1d63e2);
+        }
+
+        /* Menu */
+        .menu {
+            position: fixed;
+            top: 80px;
+            left: -250px;
+            width: 250px;
+            height: auto;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: white;
+            padding: 20px;
+            box-shadow: 4px 0 10px rgba(0, 0, 0, 0.15);
+            transition: left 0.3s ease;
+            z-index: 999;
+            border-radius: 12px;
+        }
+
+        .menu a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            padding: 12px 20px;
+            border-radius: 8px;
+            transition: background 0.3s ease;
+        }
+
+        .menu a:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Estilo da página de contagem regressiva */
+        .countdown-container {
+            text-align: center;
+            background-color: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin: 100px auto 20px;
+            max-width: 800px;
+        }
+
+        .countdown-title {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .countdown-item {
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            font-size: 1.5rem;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .countdown-label {
+            font-size: 0.8rem;
+            display: block;
+            margin-top: 5px;
+        }
+
+        .message {
+            font-size: 2em;
+            color: #2c3e50;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            display: none;
+        }
+
+        .model-container {
+            width: 600px;
+            height: 600px;
+            display: none;
+            margin: 0 auto;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            from {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+    <!-- Botão para abrir/fechar o menu -->
+    <button id="menu-toggle" class="menu-toggle">
+        <i class="fas fa-bars"></i> Menu
+    </button>
+
+    <!-- Menu -->
+    <div id="menu" class="menu">
+        <a href="/" class="active"><i class="fas fa-home"></i> Receitas Favoritas</a>
+        <a href="/feedback.html"><i class="fas fa-comment"></i> Enviar Feedback</a>
+        <a href="/quis.html"><i class="fas fa-question-circle"></i> Jogos</a>
+        <a href="/contagem_regre.html"><i class="fas fa-clock"></i> Contagem Regressiva</a>
+    </div>
+
+    <!-- Conteúdo da página de contagem regressiva -->
+    <div class="countdown-container">
+        <div class="countdown-title">Contagem Regressiva para o seu Aniversário Linda!</div>
+        <div class="countdown">
+            <div class="countdown-item">
+                <span id="days">00</span>
+                <span class="countdown-label">Dias</span>
+            </div>
+            <div class="countdown-item">
+                <span id="hours">00</span>
+                <span class="countdown-label">Horas</span>
+            </div>
+            <div class="countdown-item">
+                <span id="minutes">00</span>
+                <span class="countdown-label">Minutos</span>
+            </div>
+            <div class="countdown-item">
+                <span id="seconds">00</span>
+                <span class="countdown-label">Segundos</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="model-container" id="bolo3D"></div>
+    <div class="message" id="message">Parabéns pelos 19 anos, Ester! Muitos anos de vida, eu te amo muito! 🎉🎂</div>
+
+    <script>
+        // Script do menu interativo
+        const menuToggle = document.getElementById('menu-toggle');
+        const menu = document.getElementById('menu');
+
+        menuToggle.addEventListener('click', () => {
+            if (menu.style.left === '0px') {
+                menu.style.left = '-250px';
+            } else {
+                menu.style.left = '0';
+            }
+        });
+
+        // Script da contagem regressiva e animação do bolo 3D
+        const eventDate = new Date("2025-10-05T00:00:00").getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const timeLeft = eventDate - now;
+
+            if (timeLeft > 0) {
+                const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+                document.getElementById("days").innerText = String(days).padStart(2, "0");
+                document.getElementById("hours").innerText = String(hours).padStart(2, "0");
+                document.getElementById("minutes").innerText = String(minutes).padStart(2, "0");
+                document.getElementById("seconds").innerText = String(seconds).padStart(2, "0");
+            } else {
+                clearInterval(interval);
+                document.querySelector(".countdown-container").style.display = "none";
+                document.querySelector(".model-container").style.display = "block";
+                document.getElementById("message").style.display = "block";
+                createConfetti();
+            }
+        }
+
+        const interval = setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        function createConfetti() {
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement("div");
+                confetti.classList.add("confetti");
+                confetti.style.left = Math.random() * 100 + "vw";
+                confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                confetti.style.animationDuration = Math.random() * 3 + 2 + "s";
+                document.body.appendChild(confetti);
+            }
+        }
+
+        // Script do bolo 3D (Three.js)
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        renderer.setSize(600, 600);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        document.getElementById("bolo3D").appendChild(renderer.domElement);
+
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+        scene.add(ambientLight);
+
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+        directionalLight.position.set(1, 1, 1).normalize();
+        scene.add(directionalLight);
+
+        const camadasBolo = [
+            { raio: 2, altura: 0.5, corBolo: 0xf4a460, corCobertura: 0xfff0f5, posY: -0.75 },
+            { raio: 1.8, altura: 0.5, corBolo: 0xf4a460, corCobertura: 0xffc0cb, posY: -0.25 },
+            { raio: 1.6, altura: 0.5, corBolo: 0xf4a460, corCobertura: 0xff69b4, posY: 0.25 }
+        ];
+
+        camadasBolo.forEach(camada => {
+            const boloGeometry = new THREE.CylinderGeometry(camada.raio, camada.raio, camada.altura, 32);
+            const boloMaterial = new THREE.MeshPhongMaterial({ color: camada.corBolo, shininess: 50, flatShading: true });
+            const cilindro = new THREE.Mesh(boloGeometry, boloMaterial);
+            cilindro.position.y = camada.posY;
+            scene.add(cilindro);
+
+            const coberturaGeometry = new THREE.CylinderGeometry(camada.raio + 0.05, camada.raio + 0.05, 0.1, 32);
+            const coberturaMaterial = new THREE.MeshPhongMaterial({ color: camada.corCobertura, shininess: 50, flatShading: true });
+            const cobertura = new THREE.Mesh(coberturaGeometry, coberturaMaterial);
+            cobertura.position.y = camada.posY + camada.altura / 2 + 0.05;
+            scene.add(cobertura);
+        });
+
+        const velaGeometry = new THREE.CylinderGeometry(0.1, 0.1, 1, 16);
+        const velaMaterial = new THREE.MeshPhongMaterial({ color: 0xff6347, flatShading: true });
+
+        const posicoesVelas = [
+            { x: -0.8, z: -0.8 },
+            { x: 0.8, z: -0.8 },
+            { x: 0, z: 0 },
+            { x: -0.8, z: 0.8 },
+            { x: 0.8, z: 0.8 }
+        ];
+
+        const fireMaterial = new THREE.MeshPhongMaterial({
+            color: 0xff4500,
+            emissive: 0xff4500,
+            transparent: true,
+            opacity: 0.8,
+            flatShading: true
+        });
+
+        posicoesVelas.forEach(pos => {
+            const vela = new THREE.Mesh(velaGeometry, velaMaterial);
+            vela.position.set(pos.x, 0.75, pos.z);
+            scene.add(vela);
+
+            const chamaGeometry = new THREE.ConeGeometry(0.15, 0.5, 16);
+            const chama = new THREE.Mesh(chamaGeometry, fireMaterial);
+            chama.position.set(pos.x, 1.25, pos.z);
+            chama.rotation.x = Math.PI;
+            scene.add(chama);
+
+            function animateChama() {
+                chama.scale.y = 1 + Math.sin(Date.now() * 0.01) * 0.2;
+                requestAnimationFrame(animateChama);
+            }
+            animateChama();
+        });
+
+        camera.position.z = 5;
+
+        function animate() {
+            requestAnimationFrame(animate);
+            scene.rotation.y += 0.01;
+            renderer.render(scene, camera);
+        }
+        animate();
+    </script>
+</body>
+</html>

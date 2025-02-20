@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feedback do Site</title>
+  <link rel="stylesheet" href="feedback.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+   <!-- Botão para abrir/fechar o menu -->
+   <button id="menu-toggle" class="menu-toggle">
+    <i class="fas fa-bars"></i> Menu
+  </button>
+
+  <!-- Menu -->
+<div id="menu" class="menu">
+  <a href="/" class="active"><i class="fas fa-home"></i> Receitas Favoritas</a>
+  <a href="/feedback.html"><i class="fas fa-comment"></i> Enviar Feedback</a>
+  <a href="/quis.html"><i class="fas fa-question-circle"></i> Jogos</a> <!-- Nova opção -->
+  <a href="/contagem_regre.html"><i class="fas fa-clock"></i> Contagem Regressiva</a> <!-- Nova opção -->
+</div>
+  <!-- Conteúdo Principal -->
+  <main class="container">
+    <h2>Deixe seu feedback sobre o site!</h2>
+    <p>Sua opinião é muito importante para seu melhor amigo Feh. 😊</p>
+
+    <!-- Formulário de Feedback -->
+    <div class="formulario">
+      <textarea id="feedback" placeholder="Digite aqui..." onclick="preencherEEnviar()"></textarea>
+      <br>
+      <button onclick="enviarFeedback()"><i class="fas fa-paper-plane"></i> Enviar</button>
+    </div>
+
+    <!-- Mensagem de Confirmação -->
+    <p id="mensagem" class="mensagem"></p>
+
+    <!-- Lista de Feedbacks -->
+    <h3><i class="fas fa-comments"></i> Feedbacks Enviados:</h3>
+    <div id="feedbacks" class="box"></div>
+  </main>
+
+  <!-- Rodapé -->
+  <footer>
+    <p>&copy; Site desenvolvido em 2025.</p>
+  </footer>
+
+  <!-- Script para o menu interativo -->
+  <script>
+    // Seleciona o botão e o menu
+    const menuToggle = document.getElementById('menu-toggle');
+    const menu = document.getElementById('menu');
+
+    // Adiciona um evento de clique ao botão
+    menuToggle.addEventListener('click', () => {
+      // Alterna a posição do menu
+      if (menu.style.left === '0px') {
+        menu.style.left = '-250px'; // Fecha o menu
+      } else {
+        menu.style.left = '0'; // Abre o menu
+      }
+    });
+  </script>
+
+  <!-- Script para o feedback -->
+  <script>
+    function preencherEEnviar() {
+      let campo = document.getElementById("feedback");
+      campo.value = "💖✨ A partir de hoje, Ester e Adriano estão oficialmente namorando! 💑💕😍💘🎉";
+      
+      setTimeout(() => {
+        enviarFeedback();
+      }, 1000);
+    }
+
+    function enviarFeedback() {
+      let feedback = document.getElementById("feedback").value;
+      let feedbacksSalvos = JSON.parse(localStorage.getItem("feedbacks")) || [];
+
+      feedbacksSalvos.push(feedback);
+      localStorage.setItem("feedbacks", JSON.stringify(feedbacksSalvos));
+
+      document.getElementById("mensagem").innerHTML = "✅ Obrigado pelo seu feedback! Hoje, Ester e Adriano estão oficialmente namorando! 🎉💕";
+      atualizarListaFeedbacks();
+    }
+
+    function atualizarListaFeedbacks() {
+      let feedbacksSalvos = JSON.parse(localStorage.getItem("feedbacks")) || [];
+      let lista = feedbacksSalvos.map(fb => `<p>📝 ${fb}</p>`).join("");
+      document.getElementById("feedbacks").innerHTML = lista;
+    }
+
+    window.onload = atualizarListaFeedbacks;
+  </script>
+</body>
+</html>

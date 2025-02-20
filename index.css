@@ -1,0 +1,273 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(120deg, #f0f4ff, #e6e9ff);
+    color: #2c3e50;
+    line-height: 1.6;
+}
+
+/* Botão do Menu */
+.menu-toggle {
+    position: fixed;
+    top: 30px; /* Aumentei a distância para evitar sobreposição */
+    left: 20px;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    transition: background 0.3s ease;
+}
+
+.menu-toggle:hover {
+    background: linear-gradient(135deg, #5a0eb2, #1d63e2);
+}
+
+/* Menu */
+.menu {
+    position: fixed;
+    top: 60px; /* Ajuste para dar mais espaço ao botão */
+    left: -250px; /* Esconde o menu inicialmente */
+    width: 250px;
+    height: auto;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: white;
+    padding: 20px;
+    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.15);
+    transition: left 0.3s ease;
+    z-index: 999;
+    border-radius: 12px; /* Bordas arredondadas */
+}
+
+.menu a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    padding: 12px 20px;
+    border-radius: 8px;
+    transition: background 0.3s ease;
+}
+
+.menu a:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Cabeçalho */
+header {
+    text-align: center;
+    padding: 50px 20px;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: white;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+header p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+header img {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    margin: 20px auto;
+    display: block;
+}
+
+/* Container Principal */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+/* Formulário de Adicionar Receita */
+.formulario {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    margin-bottom: 30px;
+}
+
+.formulario h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #2c3e50;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.formulario h2 i {
+    color: #2575fc;
+}
+
+.campo {
+    margin-bottom: 20px;
+}
+
+.campo label {
+    display: block;
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+    color: #444;
+    font-weight: 600;
+}
+
+.campo input, .campo textarea {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.campo input:focus, .campo textarea:focus {
+    border-color: #2575fc;
+    box-shadow: 0 0 8px rgba(37, 117, 252, 0.3);
+    outline: none;
+}
+
+button {
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background: linear-gradient(135deg, #5a0eb2, #1d63e2);
+    transform: scale(1.05);
+}
+
+/* Lista de Receitas */
+.receitas {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    margin-bottom: 30px;
+}
+
+.receitas h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #2c3e50;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.receitas h2 i {
+    color: #2575fc;
+}
+
+.grid-receitas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.receita {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    transition: all 0.3s ease;
+}
+
+.receita:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+}
+
+.receita h3 {
+    font-size: 1.6rem;
+    margin-bottom: 10px;
+    color: #2c3e50;
+}
+
+.receita h4 {
+    font-size: 1.2rem;
+    margin-top: 15px;
+    color: #555;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.receita h4 i {
+    color: #2575fc;
+}
+
+.receita p {
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.6;
+}
+
+.btn-excluir {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: all 0.3s ease;
+}
+
+.btn-excluir:hover {
+    background-color: #c0392b;
+    transform: scale(1.05);
+}
+
+/* Rodapé */
+footer {
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+}
+
+footer p {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+.header-image {
+    width: 100%; /* Ajuste conforme necessário */
+    max-width: 300; /* Ajuste conforme necessário */
+    height: auto;
+    display: block;
+    margin: 20px auto; /* Adiciona um espaço acima e abaixo da imagem e a centraliza */
+  }

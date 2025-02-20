@@ -1,0 +1,290 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(120deg, #f0f4ff, #e6e9ff);
+    color: #2c3e50;
+    line-height: 1.6;
+}
+
+/* Botão do Menu */
+.menu-toggle {
+    position: fixed;
+    top: 30px;
+    left: 20px;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    transition: background 0.3s ease;
+}
+
+.menu-toggle:hover {
+    background: linear-gradient(135deg, #5a0eb2, #1d63e2);
+}
+
+/* Menu */
+.menu {
+    position: fixed;
+    top: 60px;
+    left: -250px;
+    width: 250px;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: white;
+    padding: 20px;
+    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.15);
+    transition: left 0.3s ease;
+    z-index: 999;
+    border-radius: 12px;
+}
+
+.menu a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    padding: 12px 20px;
+    border-radius: 8px;
+    transition: background 0.3s ease;
+}
+
+.menu a:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Cabeçalho */
+header {
+    text-align: center;
+    padding: 50px 20px;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: white;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+header p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+/* Container Principal */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+/* Jogo da Memória */
+#memory-game {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    margin-bottom: 30px;
+}
+
+#memory-game h2 {
+    font-size: 2rem;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#memory-board {
+    display: grid;
+    grid-template-columns: repeat(4, 100px);
+    gap: 10px;
+    justify-content: center;
+}
+
+#memory-board .card {
+    width: 100px;
+    height: 100px;
+    background-color: #2c3e50;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+#memory-board .card:hover {
+    transform: scale(1.05);
+}
+
+/* Jogo da Velha */
+#tic-tac-toe {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+#tic-tac-toe-board {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+#tic-tac-toe-board button {
+    width: 100px;
+    height: 100px;
+    font-size: 2rem;
+    background-color: #ecf0f1;
+    border: 2px solid #bdc3c7;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#tic-tac-toe-board button:hover {
+    background-color: #95a5a6;
+}
+
+/* Quiz */
+#quiz {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    margin-bottom: 30px;
+}
+
+#quiz h2 {
+    font-size: 2rem;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#quiz button {
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    margin-top: 20px;
+}
+
+#quiz button:hover {
+    background: linear-gradient(135deg, #5a0eb2, #1d63e2);
+    transform: scale(1.05);
+}
+
+/* Adivinhe o Número */
+#guess-the-number {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+#guess-the-number input {
+    padding: 10px;
+    font-size: 1.2rem;
+    border: 2px solid #bdc3c7;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+#guess-the-number button {
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#guess-the-number button:hover {
+    background: linear-gradient(135deg, #5a0eb2, #1d63e2);
+    transform: scale(1.05);
+}
+
+/* Quiz com Temporizador */
+#timed-quiz {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    margin-bottom: 30px;
+}
+
+#timed-quiz h2 {
+    font-size: 2rem;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#timed-quiz button {
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    margin-top: 20px;
+}
+
+#timed-quiz button:hover {
+    background: linear-gradient(135deg, #5a0eb2, #1d63e2);
+    transform: scale(1.05);
+}
+
+#timer {
+    font-size: 1.2rem;
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+/* Rodapé */
+footer {
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+}
+
+footer p {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}

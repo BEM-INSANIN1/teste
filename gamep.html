@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogos - Memória e Jogo da Velha</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(120deg, #f0f4ff, #e6e9ff);
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+
+        header {
+            text-align: center;
+            padding: 50px 20px;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: white;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        /* Jogo da Memória */
+        #memory-game {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        #memory-game h2 {
+            font-size: 2rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        #memory-board {
+            display: grid;
+            grid-template-columns: repeat(4, 100px);
+            gap: 10px;
+            justify-content: center;
+        }
+
+        #memory-board .card {
+            width: 100px;
+            height: 100px;
+            background-color: #2c3e50;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        #memory-board .card.flipped {
+            background-color: #ecf0f1;
+        }
+
+        #memory-board .card:hover {
+            transform: scale(1.05);
+        }
+
+        /* Jogo da Velha */
+        #tic-tac-toe {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        #tic-tac-toe-board {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            grid-template-rows: repeat(3, 100px);
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        #tic-tac-toe-board button {
+            width: 100px;
+            height: 100px;
+            font-size: 2rem;
+            background-color: #ecf0f1;
+            border: 2px solid #bdc3c7;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #tic-tac-toe-board button:hover {
+            background-color: #95a5a6;
+        }
+
+        footer {
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        footer p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #2575fc;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background-color: #6a11cb;
+        }
+
+        .btn-back {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #2575fc; /* Igual aos outros botões */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn-back:hover {
+            background-color: #6a11cb; /* Igual aos outros botões */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Jogos - Memória e Jogo da Velha</h1>
+        <p>Divirta-se com os jogos abaixo!</p>
+    </header>
+
+    <div class="container">
+        <!-- Jogo da Memória -->
+        <section id="memory-game">
+            <h2>Jogo da Memória</h2>
+            <div id="memory-board"></div>
+            <button id="restart-memory" class="btn">Reiniciar Jogo</button>
+        </section>
+
+        <!-- Jogo da Velha -->
+        <section id="tic-tac-toe">
+            <h2>Jogo da Velha</h2>
+            <div id="tic-tac-toe-board"></div>
+            <p id="tic-tac-toe-result"></p>
+            <div>
+                <button id="restart-tic-tac-toe" class="btn">Reiniciar Jogo</button>
+                <button id="player-vs-player" class="btn">Jogar com Player</button>
+                <button id="player-vs-ai" class="btn">Jogar com Robô</button>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; site desenvolvido em 2025.</p>
+        <button class="btn-back" onclick="window.location.href='index.html'">Voltar</button>
+    </footer>
+
+    <script>
+        // Jogo da Memória
+        const memoryBoard = document.getElementById('memory-board');
+        const restartMemoryButton = document.getElementById('restart-memory');
+        const memoryEmojis = [
+            '😀', '😂', '😍', '😎', '😜', '🤩', '😡', '😭',
+            '😀', '😂', '😍', '😎', '😜', '🤩', '😡', '😭'
+        ];
+
+        let flippedCards = [];
+        let matchedCards = [];
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function createMemoryGameBoard() {
+            memoryBoard.innerHTML = '';
+            shuffleArray(memoryEmojis).forEach(value => {
+                const card = document.createElement('div');
+                card.classList.add('card');
+                card.textContent = '';
+                card.dataset.value = value;
+                card.addEventListener('click', flipCard);
+                memoryBoard.appendChild(card);
+            });
+        }
+
+        function flipCard(event) {
+            const card = event.target;
+            if (flippedCards.length < 2 && !card.classList.contains('flipped')) {
+                card.classList.add('flipped');
+                card.textContent = card.dataset.value;
+                flippedCards.push(card);
+
+                if (flippedCards.length === 2) {
+                    checkForMatch();
+                }
+            }
+        }
+
+        function checkForMatch() {
+            if (flippedCards[0].dataset.value === flippedCards[1].dataset.value) {
+                matchedCards.push(...flippedCards);
+                flippedCards = [];
+                if (matchedCards.length === memoryEmojis.length) {
+                    setTimeout(() => alert('Você venceu!'), 500);
+                }
+            } else {
+                setTimeout(() => {
+                    flippedCards.forEach(card => {
+                        card.classList.remove('flipped');
+                        card.textContent = '';
+                    });
+                    flippedCards = [];
+                }, 1000);
+            }
+        }
+
+        // Reiniciar o Jogo da Memória
+        restartMemoryButton.addEventListener('click', () => {
+            flippedCards = [];
+            matchedCards = [];
+            createMemoryGameBoard();
+        });
+
+        createMemoryGameBoard();
+
+        // Jogo da Velha
+        const ticTacToeBoard = document.getElementById('tic-tac-toe-board');
+        const ticTacToeResult = document.getElementById('tic-tac-toe-result');
+        const restartButton = document.getElementById('restart-tic-tac-toe');
+        const playerVsPlayerButton = document.getElementById('player-vs-player');
+        const playerVsAiButton = document.getElementById('player-vs-ai');
+        let currentPlayer = 'X';
+        let gameState = ['', '', '', '', '', '', '', '', ''];
+        let gameMode = 'player'; // player ou ai
+
+        function createTicTacToeBoard() {
+            ticTacToeBoard.innerHTML = '';
+            gameState.forEach((value, index) => {
+                const button = document.createElement('button');
+                button.textContent = value;
+                button.addEventListener('click', () => makeMove(index));
+                ticTacToeBoard.appendChild(button);
+            });
+        }
+
+        function makeMove(index) {
+            if (gameState[index] === '') {
+                gameState[index] = currentPlayer;
+                currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+                createTicTacToeBoard();
+                checkWinner();
+                if (gameMode === 'ai' && currentPlayer === 'O') {
+                    aiMove();
+                }
+            }
+        }
+
+        function checkWinner() {
+            const winPatterns = [
+                [0, 1, 2],
+                [3, 4, 5],
+                [6, 7, 8],
+                [0, 3, 6],
+                [1, 4, 7],
+                [2, 5, 8],
+                [0, 4, 8],
+                [2, 4, 6]
+            ];
+
+            for (const pattern of winPatterns) {
+                const [a, b, c] = pattern;
+                if (gameState[a] && gameState[a] === gameState[b] && gameState[a] === gameState[c]) {
+                    ticTacToeResult.textContent = `${gameState[a]} venceu!`;
+                    return;
+                }
+            }
+
+            if (gameState.every(cell => cell !== '')) {
+                ticTacToeResult.textContent = 'Empate!';
+            }
+        }
+
+        function aiMove() {
+            const emptyCells = gameState
+                .map((value, index) => value === '' ? index : -1)
+                .filter(index => index !== -1);
+            const randomMove = emptyCells[Math.floor(Math.random() * emptyCells.length)];
+            gameState[randomMove] = 'O';
+            currentPlayer = 'X';
+            createTicTacToeBoard();
+            checkWinner();
+        }
+
+        restartButton.addEventListener('click', () => {
+            gameState = ['', '', '', '', '', '', '', '', ''];
+            currentPlayer = 'X';
+            ticTacToeResult.textContent = '';
+            createTicTacToeBoard();
+        });
+
+        playerVsPlayerButton.addEventListener('click', () => {
+            gameMode = 'player';
+            restartButton.click(); // Reinicia o jogo ao mudar o modo
+        });
+
+        playerVsAiButton.addEventListener('click', () => {
+            gameMode = 'ai';
+            restartButton.click(); // Reinicia o jogo ao mudar o modo
+        });
+
+        createTicTacToeBoard();
+    </script>
+</body>
+</html>

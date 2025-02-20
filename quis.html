@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quizzes - Perguntas e Temporizador</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* Reset básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(120deg, #f0f4ff, #e6e9ff);
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+
+        /* Cabeçalho */
+        header {
+            text-align: center;
+            padding: 50px 20px;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: white;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        /* Container Principal */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        /* Quiz */
+        #quiz {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        #quiz h2 {
+            font-size: 2rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        #quiz button {
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        #quiz button:hover {
+            background: linear-gradient(135deg, #5a0eb2, #1d63e2);
+            transform: scale(1.05);
+        }
+
+        /* Quiz com Temporizador */
+        #timed-quiz {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        #timed-quiz h2 {
+            font-size: 2rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        #timed-quiz button {
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        #timed-quiz button:hover {
+            background: linear-gradient(135deg, #5a0eb2, #1d63e2);
+            transform: scale(1.05);
+        }
+
+        #timer {
+            font-size: 1.2rem;
+            color: #e74c3c;
+            font-weight: bold;
+        }
+
+        /* Rodapé */
+        footer {
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        footer p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Botões adicionais */
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .nav-buttons a {
+            text-decoration: none;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: white;
+            font-size: 1rem;
+            border-radius: 8px;
+            width: 48%;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .nav-buttons a:hover {
+            background: linear-gradient(135deg, #5a0eb2, #1d63e2);
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Quizzes - Perguntas e Temporizador</h1>
+        <p>Área de perguntas e respostas!</p>
+    </header>
+
+    <div class="container">
+        <!-- Quiz sobre Nós -->
+        <section id="quiz">
+            <h2>Quiz sobre Nós</h2>
+            <div id="quiz-questions"></div>
+            <button id="submit-quiz">Enviar Respostas</button>
+        </section>
+
+        <!-- Quiz com Temporizador -->
+        <section id="timed-quiz">
+            <h2>Quiz com Temporizador</h2>
+            <button id="start-timed-quiz">Iniciar Quiz</button>
+            <div id="timed-quiz-questions" style="display:none;"></div>
+            <p id="timer" style="display:none;">Tempo restante: 30s</p>
+            <button id="submit-timed-quiz" style="display:none;">Enviar Respostas</button>
+        </section>
+
+        <!-- Navegação -->
+        <div class="nav-buttons">
+            <a href="index.html">Voltar à Página Inicial</a>
+            <a href="gamep.html">Próxima Página de Jogos</a>
+        </div>
+
+        <footer>
+            <p>&copy; Site desenvolvido em 2025.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Quiz sobre Nós
+        const quizQuestions = [
+            { question: 'Em que ano a gente se conheceu e aonde a gente começou a conversar?', options: ['2023 no project z', '2024 no project z', '2022 no project z'], answer: '2023 no project z' },
+            { question: 'Quando a gente se encontrou pela primeira vez pessoalmente?', options: ['5 de novembro', '3 de outubro', '4 de novembro'], answer: '5 de novembro' },
+            { question: 'Quem é mais organizado entre vocês dois?', options: ['Adriano', 'Vc linda', 'Ambos', 'Nenhum dos dois'], answer: '' },
+            { question: 'Qual foi o primeiro presente que você deu a ela?', options: ['Um site', 'um desenho', 'um buque de flores', 'uma lancheira por minha conta'], answer: 'um desenho' }
+        ];
+
+        const quizContainer = document.getElementById('quiz-questions');
+        quizQuestions.forEach((q, i) => {
+            quizContainer.innerHTML += `
+                <div>
+                    <p>${q.question}</p>
+                    ${q.options.map(option => `
+                        <label>
+                            <input type="radio" name="question${i}" value="${option}"> ${option}
+                        </label>
+                    `).join('<br>')}
+                </div>
+            `;
+        });
+
+        document.getElementById('submit-quiz').addEventListener('click', () => {
+            let score = 0;
+            quizQuestions.forEach((q, i) => {
+                const selectedAnswer = document.querySelector(`input[name="question${i}"]:checked`);
+                if (selectedAnswer && selectedAnswer.value === q.answer) {
+                    score++;
+                }
+            });
+            alert(`Você acertou ${score} de ${quizQuestions.length} questões.`);
+        });
+
+        // Quiz com Temporizador
+                // Quiz com Temporizador
+                const timedQuizQuestions = [
+            { question: 'Qual é a capital da França?', options: ['Paris', 'Londres', 'Berlim'], answer: 'Paris' },
+            { question: 'Quem foi Albert Einstein?', options: ['Cientista', 'Escritor', 'Ator'], answer: 'Cientista' },
+            // Novas perguntas
+            { question: 'Qual é o maior animal terrestre?', options: ['Elefante', 'Girafa', 'Baleia Azul'], answer: 'Elefante' },
+            { question: 'Quem pintou a Mona Lisa?', options: ['Leonardo da Vinci', 'Michelangelo', 'Van Gogh'], answer: 'Leonardo da Vinci' }
+        ];
+
+
+        const timedQuizContainer = document.getElementById('timed-quiz-questions');
+        timedQuizQuestions.forEach((q, i) => {
+            timedQuizContainer.innerHTML += `
+                <div>
+                    <p>${q.question}</p>
+                    ${q.options.map(option => `
+                        <label>
+                            <input type="radio" name="timed-question${i}" value="${option}"> ${option}
+                        </label>
+                    `).join('<br>')}
+                </div>
+            `;
+        });
+
+        let timer = 30;
+        const timerElement = document.getElementById('timer');
+
+        function startTimer() {
+            const interval = setInterval(() => {
+                if (timer > 0) {
+                    timer--;
+                    timerElement.textContent = `Tempo restante: ${timer}s`;
+                } else {
+                    clearInterval(interval);
+                    alert('O tempo acabou!');
+                }
+            }, 1000);
+        }
+
+        document.getElementById('start-timed-quiz').addEventListener('click', () => {
+            // Exibir questões e iniciar o temporizador
+            document.getElementById('timed-quiz-questions').style.display = 'block';
+            document.getElementById('timer').style.display = 'block';
+            document.getElementById('submit-timed-quiz').style.display = 'block';
+            startTimer();
+        });
+
+        document.getElementById('submit-timed-quiz').addEventListener('click', () => {
+            let score = 0;
+            timedQuizQuestions.forEach((q, i) => {
+                const selectedAnswer = document.querySelector(`input[name="timed-question${i}"]:checked`);
+                if (selectedAnswer && selectedAnswer.value === q.answer) {
+                    score++;
+                }
+            });
+            alert(`Você acertou ${score} de ${timedQuizQuestions.length} questões.`);
+        });
+    </script>
+</body>
+</html>
