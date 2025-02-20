@@ -1,133 +1,136 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Receitas Favoritas</title>
-  <link rel="stylesheet" href="index.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-</head>
-<body>
-  <!-- Botão para abrir/fechar o menu -->
-  <button id="menu-toggle" class="menu-toggle">
-    <i class="fas fa-bars"></i> Menu
-  </button>
-
-  <!-- Menu -->
-  <div id="menu" class="menu">
-    <a href="/" class="active"><i class="fas fa-home"></i> Receitas Favoritas</a>
-    <a href="/feedback.html"><i class="fas fa-comment"></i> Enviar Feedback</a>
-    <a href="/quis.html"><i class="fas fa-question-circle"></i> Jogos</a> <!-- Corrigido "quis.html" -->
-    <a href="/contagem_regre.html"><i class="fas fa-clock"></i> Contagem Regressiva</a>
-  </div>
-
-  <!-- Cabeçalho -->
-  <header>
-    <h1>Receitas Favoritas</h1>
-    <p>Guarde suas receitas preferidas e acesse quando quiser!</p>
-    <img src="images/A_MENINA_QUE_EU_AMO.jpg" alt="Imagem de uma receita deliciosa" class="header-image">
-    <p>Bom, Ester, esse é o seu presente. Ele foi feito com muito amor e carinho, exclusivamente para você. Eu espero que goste! Aproveite o seu presente!...</p>
-  </header>
-
-  <!-- Conteúdo Principal -->
-  <main class="container">
-    <!-- Formulário de Adicionar Receita -->
-    <section class="formulario">
-      <h2><i class="fas fa-plus-circle"></i> Adicionar Nova Receita</h2>
-      <form id="form-receita">
-        <div class="campo">
-          <label for="nome">Nome da Receita:</label>
-          <input type="text" id="nome" name="nome" required>
-        </div>
-        <div class="campo">
-          <label for="ingredientes">Ingredientes:</label>
-          <textarea id="ingredientes" name="ingredientes" rows="5" required></textarea>
-        </div>
-        <div class="campo">
-          <label for="instrucoes">Instruções de Preparo:</label>
-          <textarea id="instrucoes" name="instrucoes" rows="10" required></textarea>
-        </div>
-        <button type="submit"><i class="fas fa-save"></i> Salvar Receita</button>
-      </form>
-    </section>
-
-    <!-- Lista de Receitas -->
-    <section class="receitas">
-      <h2><i class="fas fa-book"></i> Receitas Salvas</h2>
-      <div class="grid-receitas" id="lista-receitas"></div>
-    </section>
-  </main>
-
-  <!-- Rodapé -->
-  <footer>
-    <p>&copy; Site desenvolvido em 2025</p>
-  </footer>
-
-  <!-- Script para manipulação de receitas -->
-  <script>
-    function carregarReceitas() {
-      let receitas = JSON.parse(localStorage.getItem('receitas')) || [];
-      const listaReceitas = document.getElementById('lista-receitas');
-      listaReceitas.innerHTML = '';
-
-      receitas.forEach((receita, index) => {
-        const card = `
-          <div class="receita">
-            <h3>${receita.nome}</h3>
-            <h4><i class="fas fa-list"></i> Ingredientes:</h4>
-            <p>${receita.ingredientes}</p>
-            <h4><i class="fas fa-list-ol"></i> Instruções:</h4>
-            <p>${receita.instrucoes}</p>
-            <button class="btn-excluir" onclick="excluirReceita(${index})">
-              <i class="fas fa-trash"></i> Excluir
-            </button>
-          </div>
-        `;
-        listaReceitas.innerHTML += card;
-      });
-    }
-
-    function salvarReceita() {
-      const nome = document.getElementById('nome').value;
-      const ingredientes = document.getElementById('ingredientes').value;
-      const instrucoes = document.getElementById('instrucoes').value;
-
-      if (!nome || !ingredientes || !instrucoes) {
-        alert('Por favor, preencha todos os campos!');
-        return;
-      }
-
-      let receitas = JSON.parse(localStorage.getItem('receitas')) || [];
-      receitas.push({ nome, ingredientes, instrucoes });
-      localStorage.setItem('receitas', JSON.stringify(receitas));
-
-      alert('Receita salva com sucesso!');
-      document.getElementById('form-receita').reset();
-      carregarReceitas();
-    }
-
-    function excluirReceita(index) {
-      let receitas = JSON.parse(localStorage.getItem('receitas')) || [];
-      receitas.splice(index, 1);
-      localStorage.setItem('receitas', JSON.stringify(receitas));
-      carregarReceitas();
-    }
-
-    document.getElementById('form-receita').addEventListener('submit', function (e) {
-      e.preventDefault();
-      salvarReceita();
-    });
-
-    window.onload = carregarReceitas;
-  </script>
-
-  <!-- Script para o menu interativo -->
-  <script>
-    document.getElementById('menu-toggle').addEventListener('click', () => {
-      const menu = document.getElementById('menu');
-      menu.style.left = menu.style.left === '0px' ? '-250px' : '0px';
-    });
-  </script>
-</body>
+<!DOCTYPE html> 
+<html lang="pt-BR"> 
+<head>   
+    <meta charset="UTF-8">   
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">   
+    <title>Receitas Favoritas</title>   
+    <link rel="stylesheet" href="index.css">   
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">   
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> 
+</head> 
+<body>   
+    <!-- Botão para abrir/fechar o menu -->   
+    <button id="menu-toggle" class="menu-toggle">     
+        <i class="fas fa-bars"></i> Menu   
+    </button>    
+    
+    <!-- Menu -->   
+    <div id="menu" class="menu">     
+      <a href="/"><i class="fas fa-home"></i> Receitas Favoritas</a>     
+      <a href="/feedback.html"><i class="fas fa-comment"></i> Enviar Feedback</a>     
+      <a href="/quis.html"><i class="fas fa-question-circle"></i> Jogos</a>     
+      <a href="/contagem_regre.html"><i class="fas fa-clock"></i> Contagem Regressiva</a>     
+      <a href="/oraculo.html"><i class="fas fa-magic"></i> Oráculo</a>     
+      <a href="/video.html"><i class="fas fa-video"></i> Vídeos</a>   
+      <a href="/motivos.html"><i class="fas fa-heart"></i> Motivos</a>   
+    </div>    
+    
+    <!-- Cabeçalho -->   
+    <header>     
+        <h1>Receitas Favoritas</h1>     
+        <p>Guarde suas receitas preferidas e acesse quando quiser!</p>     
+        <img src="images/A_MENINA_QUE_EU_AMO.jpg" alt="Imagem de uma receita deliciosa" class="header-image">     
+        <p>Bom, Ester, esse é o seu presente. Ele foi feito com muito amor e carinho, exclusivamente para você. Eu espero que goste! Aproveite o seu presente!...</p>   
+    </header>    
+    
+    <!-- Conteúdo Principal -->   
+    <main class="container">     
+        <!-- Formulário de Adicionar Receita -->     
+        <section class="formulario">       
+            <h2><i class="fas fa-plus-circle"></i> Adicionar Nova Receita</h2>       
+            <form id="form-receita">         
+                <div class="campo">           
+                    <label for="nome">Nome da Receita:</label>           
+                    <input type="text" id="nome" name="nome" required>         
+                </div>         
+                <div class="campo">           
+                    <label for="ingredientes">Ingredientes:</label>           
+                    <textarea id="ingredientes" name="ingredientes" rows="5" required></textarea>         
+                </div>         
+                <div class="campo">           
+                    <label for="instrucoes">Instruções de Preparo:</label>           
+                    <textarea id="instrucoes" name="instrucoes" rows="10" required></textarea>         
+                </div>         
+                <button type="submit"><i class="fas fa-save"></i> Salvar Receita</button>       
+            </form>     
+        </section>      
+        
+        <!-- Lista de Receitas -->     
+        <section class="receitas">       
+            <h2><i class="fas fa-book"></i> Receitas Salvas</h2>       
+            <div class="grid-receitas" id="lista-receitas"></div>     
+        </section>   
+    </main>    
+    
+    <!-- Rodapé -->   
+    <footer>     
+        <p>&copy; Site desenvolvido em 2025</p>   
+    </footer>    
+    
+    <!-- Script para manipulação de receitas -->   
+    <script>     
+        function carregarReceitas() {       
+            let receitas = JSON.parse(localStorage.getItem('receitas')) || [];       
+            const listaReceitas = document.getElementById('lista-receitas');       
+            listaReceitas.innerHTML = '';        
+            
+            receitas.forEach((receita, index) => {         
+                const card = `           
+                    <div class="receita">             
+                        <h3>${receita.nome}</h3>             
+                        <h4><i class="fas fa-list"></i> Ingredientes:</h4>             
+                        <p>${receita.ingredientes}</p>             
+                        <h4><i class="fas fa-list-ol"></i> Instruções:</h4>             
+                        <p>${receita.instrucoes}</p>             
+                        <button class="btn-excluir" onclick="excluirReceita(${index})">               
+                            <i class="fas fa-trash"></i> Excluir             
+                        </button>           
+                    </div>         
+                `;         
+                listaReceitas.innerHTML += card;       
+            });     
+        }      
+        
+        function salvarReceita() {       
+            const nome = document.getElementById('nome').value;       
+            const ingredientes = document.getElementById('ingredientes').value;       
+            const instrucoes = document.getElementById('instrucoes').value;        
+            
+            if (!nome || !ingredientes || !instrucoes) {         
+                alert('Por favor, preencha todos os campos!');         
+                return;       
+            }        
+            
+            let receitas = JSON.parse(localStorage.getItem('receitas')) || [];       
+            receitas.push({ nome, ingredientes, instrucoes });       
+            localStorage.setItem('receitas', JSON.stringify(receitas));        
+            
+            alert('Receita salva com sucesso!');       
+            document.getElementById('form-receita').reset();       
+            carregarReceitas();     
+        }      
+        
+        function excluirReceita(index) {       
+            let receitas = JSON.parse(localStorage.getItem('receitas')) || [];       
+            receitas.splice(index, 1);       
+            localStorage.setItem('receitas', JSON.stringify(receitas));       
+            carregarReceitas();     
+        }      
+        
+        document.getElementById('form-receita').addEventListener('submit', function (e) {       
+            e.preventDefault();       
+            salvarReceita();     
+        });      
+        
+        window.onload = carregarReceitas;   
+    </script>    
+    
+    <!-- Script para o menu interativo -->   
+    <script>     
+        document.getElementById('menu-toggle').addEventListener('click', () => {       
+            const menu = document.getElementById('menu');       
+            menu.style.left = menu.style.left === '0px' ? '-250px' : '0px';     
+        });   
+    </script> 
+</body> 
 </html>
