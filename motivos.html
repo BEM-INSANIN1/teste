@@ -6,6 +6,7 @@
     <title>100 Motivos para Gostar de Você</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
+        /* Reset básico */
         * {
             margin: 0;
             padding: 0;
@@ -14,37 +15,101 @@
 
         body, html {
             height: 100%;
+            margin: 0;
+            padding: 0;
             font-family: 'Poppins', sans-serif;
             background: linear-gradient(120deg, #f0f4ff, #e6e9ff);
             color: #2c3e50;
             line-height: 1.6;
         }
 
-        .menu-toggle {
-            position: fixed;
-            top: 30px;
-            left: 20px;
+        /* Cabeçalho */
+        header {
+            text-align: center;
+            padding: 50px 20px;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: white;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        /* Container Principal */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        /* Lista de Motivos */
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+
+        li {
+            background: white;
+            padding: 12px 20px;
+            margin: 10px auto;
+            border-radius: 12px;
+            max-width: 600px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        li:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Botão */
+        button {
             background: linear-gradient(135deg, #6a11cb, #2575fc);
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 12px 24px;
             font-size: 1rem;
             border-radius: 8px;
             cursor: pointer;
-            z-index: 1000;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-            transition: background 0.3s ease;
+            transition: all 0.3s ease;
+            margin-top: 20px;
         }
 
-        .menu-toggle:hover {
+        button:hover {
             background: linear-gradient(135deg, #5a0eb2, #1d63e2);
+            transform: scale(1.05);
         }
 
+        /* Rodapé */
+        footer {
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        footer p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Menu */
         .menu {
             position: fixed;
             top: 60px;
             left: -250px;
             width: 250px;
+            height: 100%;
             background: linear-gradient(135deg, #6a11cb, #2575fc);
             color: white;
             padding: 20px;
@@ -69,84 +134,162 @@
             background: rgba(255, 255, 255, 0.1);
         }
 
-        header {
-            text-align: center;
-            padding: 50px 20px;
+        /* Botão do Menu */
+        .menu-toggle {
+            position: fixed;
+            top: 30px;
+            left: 20px;
             background: linear-gradient(135deg, #6a11cb, #2575fc);
             color: white;
-        }
-
-        header h1 {
-            font-size: 2.5rem;
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 20px auto;
-            padding: 20px;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .motivos {
-            list-style: none;
-            padding: 0;
-        }
-
-        .motivos li {
-            background: #f9f9f9;
-            margin: 10px 0;
-            padding: 15px;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
             border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            transition: background 0.3s ease;
+        }
+
+        .menu-toggle:hover {
+            background: linear-gradient(135deg, #5a0eb2, #1d63e2);
         }
     </style>
 </head>
 <body>
-    <button id="menu-toggle" class="menu-toggle">☰ Menu</button>
-    <div id="menu" class="menu">     
-        <a href="/"><i class="fas fa-home"></i> Receitas Favoritas</a>     
-        <a href="/feedback.html"><i class="fas fa-comment"></i> Enviar Feedback</a>     
-        <a href="/quis.html"><i class="fas fa-question-circle"></i> Jogos</a>     
-        <a href="/contagem_regre.html"><i class="fas fa-clock"></i> Contagem Regressiva</a>     
-        <a href="/oraculo.html"><i class="fas fa-magic"></i> Oráculo</a>     
-        <a href="/video.html"><i class="fas fa-video"></i> Vídeos</a>   
-        <a href="/motivos.html"><i class="fas fa-heart"></i> Motivos</a>   
-    </div>
+        <!-- Botão para abrir/fechar o menu -->   
+        <button id="menu-toggle" class="menu-toggle">     
+            <i class="fas fa-bars"></i> Menu   
+        </button>    
+        
+        <!-- Menu -->   
+        <div id="menu" class="menu">     
+          <a href="/"><i class="fas fa-home"></i> Receitas Favoritas</a>     
+          <a href="/feedback.html"><i class="fas fa-comment"></i> Enviar Feedback</a>     
+          <a href="/quis.html"><i class="fas fa-question-circle"></i> Jogos</a>     
+          <a href="/contagem_regre.html"><i class="fas fa-clock"></i> Contagem Regressiva</a>     
+          <a href="/oraculo.html"><i class="fas fa-magic"></i> Oráculo</a>     
+          <a href="/video.html"><i class="fas fa-video"></i> Vídeos</a>   
+          <a href="/motivos.html"><i class="fas fa-heart"></i> Motivos</a>   
+        </div>    
     <header>
-        <h1>100 Motivos para Gostar de Você</h1>
+        <h1><i class="fas fa-heart"></i> 100 Motivos para Gostar de Você <i class="fas fa-heart"></i></h1>
     </header>
+
     <div class="container">
-        <ul class="motivos">
-            <li>Você me apoia acima de tudo.</li>
-            <li>Você me traz sorte na vida.</li>
-            <li>Você me ajudou a sair da minha zona de conforto.</li>
-            <li>Você me conhece melhor que ninguém.</li>
-            <li>Você me faz sentir seguro.</li>
-            <li>Você me inspira.</li>
-            <li>Você me aceita como eu sou.</li>
-            <li>Você é o meu melhor amigo.</li>
-            <li>Você me faz rir.</li>
-            <li>Você me faz acreditar em mim mesmo.</li>
-            <li>Você me escuta sem julgamentos.</li>
-            <li>Você me faz sentir especial.</li>
-            <li>Você me ajuda a crescer como pessoa.</li>
-            <li>Você me surpreende todos os dias.</li>
-            <li>Você me faz sentir amado mesmo nos meus piores dias.</li>
-            <li>Você me dá forças quando eu mais preciso.</li>
-            <li>Você me faz ver o lado bom da vida.</li>
-            <li>Você me entende sem eu precisar falar.</li>
-            <li>Você me faz sentir que posso conquistar qualquer coisa.</li>
-            <li>Você me faz sentir confortável sendo eu mesmo.</li>
+        <ul id="motivos-list">
+            <!-- As frases serão carregadas aqui -->
         </ul>
+        <button onclick="carregarProximosMotivos()">Mostrar Próximos</button>
     </div>
-    <script>     
+
+    <footer>
+        <p>&copy; 2025 Todos os direitos reservados</p>
+    </footer>
+
+    <script>
+        const motivos = [
+            "Você me traz sorte na vida.",
+            "Você me ajudou a sair da minha zona de conforto.",
+            "Você me conhece melhor que ninguém.",
+            "Você me faz sentir seguro.",
+            "Você me inspira.",
+            "Você me aceita como eu sou.",
+            "Você é o meu melhor amigo.",
+            "Você me faz rir.",
+            "Você me faz acreditar em mim mesmo.",
+            "Você me escuta sem julgamentos.",
+            "Você me faz sentir especial.",
+            "Você me ajuda a crescer como pessoa.",
+            "Você me surpreende todos os dias.",
+            "Você me faz sentir amado mesmo nos meus piores dias.",
+            "Você me dá forças quando eu mais preciso.",
+            "Você me faz ver o lado bom da vida.",
+            "Você me entende sem eu precisar falar.",
+            "Você me faz sentir que posso conquistar qualquer coisa.",
+            "Você me faz sentir confortável sendo eu mesmo.",
+            "Você me ajuda a superar meus medos.",
+            "Você me faz sentir que não estou sozinho.",
+            "Você me faz acreditar no amor verdadeiro.",
+            "Você me faz sentir que posso contar com você sempre.",
+            "Você me faz sentir que sou suficiente.",
+            "Você me faz sentir que posso ser vulnerável sem medo.",
+            "Você me faz sentir que posso sonhar alto.",
+            "Você me faz sentir que posso errar e ainda ser amado.",
+            "Você me faz sentir que posso ser autêntico.",
+            "Você me faz sentir que posso compartilhar tudo com você.",
+            "Você me faz sentir que posso confiar em você completamente.",
+            "Você me faz sentir que posso ser feliz ao seu lado.",
+            "Você me faz sentir que posso ser eu mesmo sem máscaras.",
+            "Você me faz sentir que posso contar com seu apoio incondicional.",
+            "Você me faz sentir que posso ser forte porque você está comigo.",
+            "Você me faz sentir que posso ser fraco porque você me apoia.",
+            "Você me faz sentir que posso ser corajoso porque você me inspira.",
+            "Você me faz sentir que posso ser gentil porque você me ensinou.",
+            "Você me faz sentir que posso ser paciente porque você me mostra como.",
+            "Você me faz sentir que posso ser resiliente porque você me motiva.",
+            "Você me faz sentir que posso ser grato porque você me lembra das coisas boas.",
+            "Você me faz sentir que posso ser otimista porque você me traz esperança.",
+            "Você me faz sentir que posso ser amoroso porque você me ensinou o verdadeiro amor.",
+            "Você me faz sentir que posso ser compreensivo porque você me mostra como.",
+            "Você me faz sentir que posso ser generoso porque você é meu exemplo.",
+            "Você me faz sentir que posso ser fiel porque você me inspira confiança.",
+            "Você me faz sentir que posso ser leal porque você é meu porto seguro.",
+            "Você me faz sentir que posso ser sincero porque você valoriza a verdade.",
+            "Você me faz sentir que posso ser carinhoso porque você me ensinou a importância do afeto.",
+            "Você me faz sentir que posso ser paciente porque você me mostra o valor da calma.",
+            "Você me faz sentir que posso ser persistente porque você nunca desiste de mim.",
+            "Você me faz sentir que posso ser corajoso porque você me encoraja.",
+            "Você me faz sentir que posso ser humilde porque você me lembra do que realmente importa.",
+            "Você me faz sentir que posso ser grato porque você me mostra o valor das pequenas coisas.",
+            "Você me faz sentir que posso ser feliz porque você traz alegria à minha vida.",
+            "Você me faz sentir que posso ser eu mesmo porque você me ama assim.",
+            "Você me faz sentir que posso ser autêntico porque você valoriza minha essência.",
+            "Você me faz sentir que posso ser confiante porque você acredita em mim.",
+            "Você me faz sentir que posso ser forte porque você está ao meu lado.",
+            "Você me faz sentir que posso ser vulnerável porque você me acolhe.",
+            "Você me faz sentir que posso ser corajoso porque você me inspira.",
+            "Você me faz sentir que posso ser amoroso porque você me ensinou o verdadeiro amor.",
+            "Você me faz sentir que posso ser paciente porque você me mostra o valor da calma.",
+            "Você me faz sentir que posso ser persistente porque você nunca desiste de mim.",
+            "Você me faz sentir que posso ser grato porque você me mostra o valor das pequenas coisas.",
+            "Você me faz sentir que posso ser feliz porque você traz alegria à minha vida.",
+            "Você me faz sentir que posso ser eu mesmo porque você me ama assim."
+        ];
+
+        let indiceAtual = 0;
+        const quantidadePorClique = 20;
+
+        function carregarProximosMotivos() {
+            const motivosList = document.getElementById('motivos-list');
+            motivosList.innerHTML = ''; // Limpa a lista
+
+            // Exibe os próximos 20 motivos
+            for (let i = indiceAtual; i < indiceAtual + quantidadePorClique && i < motivos.length; i++) {
+                const motivo = motivos[i];
+                const listItem = document.createElement('li');
+                listItem.textContent = motivo;
+                motivosList.appendChild(listItem);
+            }
+
+            // Atualiza o índice atual
+            indiceAtual += quantidadePorClique;
+
+            // Se já mostraram todos os motivos, desabilita o botão
+            if (indiceAtual >= motivos.length) {
+                document.querySelector('button').disabled = true;
+                document.querySelector('button').textContent = "Fim das Frases";
+            }
+        }
+
+        // Carregar os primeiros 20 motivos quando a página for carregada
+        window.onload = carregarProximosMotivos;
+
+        // Script para o menu interativo 
         document.getElementById('menu-toggle').addEventListener('click', () => {       
             const menu = document.getElementById('menu');       
             menu.style.left = menu.style.left === '0px' ? '-250px' : '0px';     
-        });   
+        });  
     </script>
 </body>
 </html>
