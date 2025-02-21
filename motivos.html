@@ -12,7 +12,7 @@
             padding: 0;
             box-sizing: border-box;
         }
-
+    
         body, html {
             height: 100%;
             margin: 0;
@@ -22,7 +22,7 @@
             color: #2c3e50;
             line-height: 1.6;
         }
-
+    
         /* Cabeçalho */
         header {
             text-align: center;
@@ -30,17 +30,17 @@
             background: linear-gradient(135deg, #6a11cb, #2575fc);
             color: white;
         }
-
+    
         header h1 {
             font-size: 2.5rem;
             margin-bottom: 10px;
         }
-
+    
         header p {
             font-size: 1.2rem;
             margin-bottom: 20px;
         }
-
+    
         /* Container Principal */
         .container {
             width: 90%;
@@ -48,14 +48,14 @@
             margin: 0 auto;
             padding: 20px 0;
         }
-
+    
         /* Lista de Motivos */
         ul {
             list-style-type: none;
             padding: 0;
             margin-top: 20px;
         }
-
+    
         li {
             background: white;
             padding: 12px 20px;
@@ -65,13 +65,13 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
         }
-
+    
         li:hover {
             transform: translateY(-5px);
             box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
         }
-
-        /* Botão */
+    
+        /* Botão Carregar Mais */
         button {
             background: linear-gradient(135deg, #6a11cb, #2575fc);
             color: white;
@@ -82,13 +82,17 @@
             cursor: pointer;
             transition: all 0.3s ease;
             margin-top: 20px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            z-index: 10;
         }
-
+    
         button:hover {
             background: linear-gradient(135deg, #5a0eb2, #1d63e2);
             transform: scale(1.05);
         }
-
+    
         /* Rodapé */
         footer {
             background: linear-gradient(135deg, #6a11cb, #2575fc);
@@ -97,64 +101,58 @@
             padding: 20px;
             margin-top: 40px;
         }
-
+    
         footer p {
             font-size: 0.9rem;
             opacity: 0.9;
         }
-
+    
         /* Menu */
         .menu {
             position: fixed;
-            top: 60px;
-            left: -250px;
+            top: 0;
+            left: -250px; /* Inicialmente escondido */
             width: 250px;
             height: 100%;
-            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            background-color: #333;
             color: white;
-            padding: 20px;
-            box-shadow: 4px 0 10px rgba(0, 0, 0, 0.15);
             transition: left 0.3s ease;
-            z-index: 999;
-            border-radius: 12px;
+            z-index: 1000;
+            padding-top: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
         }
-
+    
         .menu a {
-            display: block;
-            color: white;
+            padding: 10px 15px;
             text-decoration: none;
-            font-size: 1.1rem;
-            margin-bottom: 15px;
-            padding: 12px 20px;
-            border-radius: 8px;
-            transition: background 0.3s ease;
-        }
-
-        .menu a:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        /* Botão do Menu */
-        .menu-toggle {
-            position: fixed;
-            top: 30px;
-            left: 20px;
-            background: linear-gradient(135deg, #6a11cb, #2575fc);
             color: white;
+            display: block;
+            font-size: 18px;
+        }
+    
+        .menu a:hover {
+            background-color: #575757;
+        }
+    
+        /* Menu Toggle Button */
+        .menu-toggle {
+            font-size: 1.5rem;
+            color: #333;
+            background-color: #fff;
             border: none;
             padding: 10px 20px;
-            font-size: 1rem;
-            border-radius: 8px;
             cursor: pointer;
-            z-index: 1000;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-            transition: background 0.3s ease;
+            z-index: 1050;
+            position: fixed;
+            top: 20px;
+            left: 20px;
         }
-
-        .menu-toggle:hover {
-            background: linear-gradient(135deg, #5a0eb2, #1d63e2);
+    
+        .menu-toggle i {
+            font-size: 1.5rem;
         }
     </style>
+    
 </head>
 <body>
         <!-- Botão para abrir/fechar o menu -->   
