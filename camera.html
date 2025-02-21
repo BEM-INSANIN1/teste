@@ -20,6 +20,9 @@
             display: none;
             width: 300px;
             border-radius: 10px;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
         }
         #pergunta {
             font-size: 24px;
@@ -34,6 +37,9 @@
             border-radius: 5px;
             cursor: pointer;
             margin-top: 10px;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
         }
         #desligar {
             display: none;
@@ -44,12 +50,15 @@
             font-weight: bold;
             color: #d63384;
             margin-top: 20px;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
         }
     </style>
 </head>
 <body>
     <div id="pergunta">Quem é a pessoa mais linda do mundo?</div>
-    <button id="descobrir" onclick="mostrarCamera()">Descubra</button>
+    <button id="descobrir" onclick="mostrarCamera()" style="opacity:1; transform:translateY(0);">Descubra</button>
     <video id="video" autoplay></video>
     <button id="desligar" onclick="desligarCamera()">Desligar Câmera</button>
     <div id="mensagem">Você acabou de descobrir quem é a dona do meu coração ❤️</div>
@@ -67,9 +76,19 @@
             pergunta.style.display = 'none';
             descobrirBotao.style.display = 'none';
             
-            // Mostra a câmera e o botão de desligar
+            // Mostra a câmera com animação
             video.style.display = 'block';
+            setTimeout(() => {
+                video.style.opacity = '1';
+                video.style.transform = 'scale(1)';
+            }, 10);
+            
+            // Mostra o botão de desligar com animação
             desligarBotao.style.display = 'block';
+            setTimeout(() => {
+                desligarBotao.style.opacity = '1';
+                desligarBotao.style.transform = 'translateY(0)';
+            }, 300);
             
             // Ativa a câmera frontal
             navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' } })
@@ -93,12 +112,23 @@
                 tracks.forEach(track => track.stop());
             }
             
-            // Esconde o vídeo e o botão de desligar
-            video.style.display = 'none';
-            desligarBotao.style.display = 'none';
+            // Esconde o vídeo e o botão de desligar com animação
+            video.style.opacity = '0';
+            video.style.transform = 'scale(0.8)';
+            desligarBotao.style.opacity = '0';
+            desligarBotao.style.transform = 'translateY(-10px)';
             
-            // Exibe a mensagem especial
-            mensagem.style.display = 'block';
+            setTimeout(() => {
+                video.style.display = 'none';
+                desligarBotao.style.display = 'none';
+                
+                // Exibe a mensagem especial com animação
+                mensagem.style.display = 'block';
+                setTimeout(() => {
+                    mensagem.style.opacity = '1';
+                    mensagem.style.transform = 'scale(1)';
+                }, 10);
+            }, 500);
         }
     </script>
 </body>
