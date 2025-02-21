@@ -33,6 +33,14 @@
             font-size: 18px;
             border-radius: 5px;
             cursor: pointer;
+            margin-top: 10px;
+        }
+        #mensagem {
+            display: none;
+            font-size: 36px;
+            font-weight: bold;
+            color: #d63384;
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -40,23 +48,30 @@
     <div id="pergunta">Quem é a pessoa mais linda do mundo?</div>
     <button onclick="mostrarCamera()">Descubra</button>
     <video id="video" autoplay></video>
+    <button id="desligar" onclick="desligarCamera()" style="display:none;">Desligar Câmera</button>
+    <div id="mensagem">Você acabou de descobrir quem é a dona do meu coração ❤️</div>
     
     <script>
+        let stream;
+        
         function mostrarCamera() {
             let video = document.getElementById('video');
             let pergunta = document.getElementById('pergunta');
             let botao = document.querySelector('button');
+            let desligarBotao = document.getElementById('desligar');
 
             // Esconde a pergunta e o botão
             pergunta.style.display = 'none';
             botao.style.display = 'none';
             
-            // Mostra a câmera
+            // Mostra a câmera e o botão de desligar
             video.style.display = 'block';
+            desligarBotao.style.display = 'inline-block';
             
             // Ativa a câmera frontal
             navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' } })
-                .then(stream => {
+                .then(mediaStream => {
+                    stream = mediaStream;
                     video.srcObject = stream;
                 })
                 .catch(error => {
@@ -64,12 +79,24 @@
                 });
         }
 
-        // Exibe a mensagem ao sair da página
-        window.addEventListener("visibilitychange", function () {
-            if (document.visibilityState === 'hidden') {
-                alert("Você acabou de descobrir quem é a dona do meu coração ❤️");
+        function desligarCamera() {
+            let video = document.getElementById('video');
+            let desligarBotao = document.getElementById('desligar');
+            let mensagem = document.getElementById('mensagem');
+            
+            // Para a transmissão da câmera
+            if (stream) {
+                let tracks = stream.getTracks();
+                tracks.forEach(track => track.stop());
             }
-        });
+            
+            // Esconde o vídeo e o botão de desligar
+            video.style.display = 'none';
+            desligarBotao.style.display = 'none';
+            
+            // Exibe a mensagem especial
+            mensagem.style.display = 'block';
+        }
     </script>
 </body>
 </html>
