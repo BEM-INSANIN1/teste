@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>100 Motivos para Gostar de Você</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(120deg, #f0f4ff, #e6e9ff);
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+
+        .menu-toggle {
+            position: fixed;
+            top: 30px;
+            left: 20px;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            transition: background 0.3s ease;
+        }
+
+        .menu-toggle:hover {
+            background: linear-gradient(135deg, #5a0eb2, #1d63e2);
+        }
+
+        .menu {
+            position: fixed;
+            top: 60px;
+            left: -250px;
+            width: 250px;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: white;
+            padding: 20px;
+            box-shadow: 4px 0 10px rgba(0, 0, 0, 0.15);
+            transition: left 0.3s ease;
+            z-index: 999;
+            border-radius: 12px;
+        }
+
+        .menu a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            padding: 12px 20px;
+            border-radius: 8px;
+            transition: background 0.3s ease;
+        }
+
+        .menu a:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        header {
+            text-align: center;
+            padding: 50px 20px;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: white;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .motivos {
+            list-style: none;
+            padding: 0;
+        }
+
+        .motivos li {
+            background: #f9f9f9;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <button id="menu-toggle" class="menu-toggle">☰ Menu</button>
+    <div id="menu" class="menu">     
+        <a href="/"><i class="fas fa-home"></i> Receitas Favoritas</a>     
+        <a href="/feedback.html"><i class="fas fa-comment"></i> Enviar Feedback</a>     
+        <a href="/quis.html"><i class="fas fa-question-circle"></i> Jogos</a>     
+        <a href="/contagem_regre.html"><i class="fas fa-clock"></i> Contagem Regressiva</a>     
+        <a href="/oraculo.html"><i class="fas fa-magic"></i> Oráculo</a>     
+        <a href="/video.html"><i class="fas fa-video"></i> Vídeos</a>   
+        <a href="/motivos.html"><i class="fas fa-heart"></i> Motivos</a>   
+    </div>
+    <header>
+        <h1>100 Motivos para Gostar de Você</h1>
+    </header>
+    <div class="container">
+        <ul class="motivos">
+            <li>Você me apoia acima de tudo.</li>
+            <li>Você me traz sorte na vida.</li>
+            <li>Você me ajudou a sair da minha zona de conforto.</li>
+            <li>Você me conhece melhor que ninguém.</li>
+            <li>Você me faz sentir seguro.</li>
+            <li>Você me inspira.</li>
+            <li>Você me aceita como eu sou.</li>
+            <li>Você é o meu melhor amigo.</li>
+            <li>Você me faz rir.</li>
+            <li>Você me faz acreditar em mim mesmo.</li>
+            <li>Você me escuta sem julgamentos.</li>
+            <li>Você me faz sentir especial.</li>
+            <li>Você me ajuda a crescer como pessoa.</li>
+            <li>Você me surpreende todos os dias.</li>
+            <li>Você me faz sentir amado mesmo nos meus piores dias.</li>
+            <li>Você me dá forças quando eu mais preciso.</li>
+            <li>Você me faz ver o lado bom da vida.</li>
+            <li>Você me entende sem eu precisar falar.</li>
+            <li>Você me faz sentir que posso conquistar qualquer coisa.</li>
+            <li>Você me faz sentir confortável sendo eu mesmo.</li>
+        </ul>
+    </div>
+    <script>     
+        document.getElementById('menu-toggle').addEventListener('click', () => {       
+            const menu = document.getElementById('menu');       
+            menu.style.left = menu.style.left === '0px' ? '-250px' : '0px';     
+        });   
+    </script>
+</body>
+</html>
