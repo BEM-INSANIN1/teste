@@ -64,9 +64,11 @@
                 });
         }
 
-        // Quando a pessoa sair da página, exibe a mensagem
-        window.addEventListener("beforeunload", function (event) {
-            alert("Você acabou de descobrir quem é a dona do meu coração ❤️");
+        // Exibe a mensagem ao sair da página
+        window.addEventListener("visibilitychange", function () {
+            if (document.visibilityState === 'hidden') {
+                alert("Você acabou de descobrir quem é a dona do meu coração ❤️");
+            }
         });
     </script>
 </body>
