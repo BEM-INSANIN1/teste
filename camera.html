@@ -35,6 +35,9 @@
             cursor: pointer;
             margin-top: 10px;
         }
+        #desligar {
+            display: none;
+        }
         #mensagem {
             display: none;
             font-size: 36px;
@@ -46,9 +49,9 @@
 </head>
 <body>
     <div id="pergunta">Quem é a pessoa mais linda do mundo?</div>
-    <button onclick="mostrarCamera()">Descubra</button>
+    <button id="descobrir" onclick="mostrarCamera()">Descubra</button>
     <video id="video" autoplay></video>
-    <button id="desligar" onclick="desligarCamera()" style="display:none;">Desligar Câmera</button>
+    <button id="desligar" onclick="desligarCamera()">Desligar Câmera</button>
     <div id="mensagem">Você acabou de descobrir quem é a dona do meu coração ❤️</div>
     
     <script>
@@ -57,16 +60,16 @@
         function mostrarCamera() {
             let video = document.getElementById('video');
             let pergunta = document.getElementById('pergunta');
-            let botao = document.querySelector('button');
+            let descobrirBotao = document.getElementById('descobrir');
             let desligarBotao = document.getElementById('desligar');
 
-            // Esconde a pergunta e o botão
+            // Esconde a pergunta e o botão de descobrir
             pergunta.style.display = 'none';
-            botao.style.display = 'none';
+            descobrirBotao.style.display = 'none';
             
             // Mostra a câmera e o botão de desligar
             video.style.display = 'block';
-            desligarBotao.style.display = 'inline-block';
+            desligarBotao.style.display = 'block';
             
             // Ativa a câmera frontal
             navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' } })
