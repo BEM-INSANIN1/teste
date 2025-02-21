@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surpresa Especial</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #ffdde1;
+            color: #d63384;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        #video {
+            display: none;
+            width: 300px;
+            border-radius: 10px;
+        }
+        #pergunta {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        button {
+            background-color: #ff4081;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="pergunta">Quem é a pessoa mais linda do mundo?</div>
+    <button onclick="mostrarCamera()">Descubra</button>
+    <video id="video" autoplay></video>
+    
+    <script>
+        function mostrarCamera() {
+            let video = document.getElementById('video');
+            let pergunta = document.getElementById('pergunta');
+            let botao = document.querySelector('button');
+
+            // Esconde a pergunta e o botão
+            pergunta.style.display = 'none';
+            botao.style.display = 'none';
+            
+            // Mostra a câmera
+            video.style.display = 'block';
+            
+            // Ativa a câmera frontal
+            navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' } })
+                .then(stream => {
+                    video.srcObject = stream;
+                })
+                .catch(error => {
+                    console.error("Erro ao acessar a câmera", error);
+                });
+        }
+
+        // Quando a pessoa sair da página, exibe a mensagem
+        window.addEventListener("beforeunload", function (event) {
+            alert("Você acabou de descobrir quem é a dona do meu coração ❤️");
+        });
+    </script>
+</body>
+</html>
