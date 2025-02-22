@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mensagem de Perdão</title>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        /* Reset básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(120deg, #f0f4ff, #e6e9ff);
+            color: #2c3e50;
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            position: relative;
+        }
+
+        /* Botão do Menu */
+        .menu-toggle {
+            position: fixed;
+            top: 30px;
+            left: 20px;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            transition: background 0.3s ease;
+        }
+
+        .menu-toggle:hover {
+            background: linear-gradient(135deg, #5a0eb2, #1d63e2);
+        }
+
+        /* Menu */
+        .menu {
+            position: fixed;
+            top: 60px;
+            left: -250px;
+            width: 250px;
+            height: auto;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: white;
+            padding: 20px;
+            box-shadow: 4px 0 10px rgba(0, 0, 0, 0.15);
+            transition: left 0.3s ease;
+            z-index: 999;
+            border-radius: 12px;
+        }
+
+        .menu a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            padding: 12px 20px;
+            border-radius: 8px;
+            transition: background 0.3s ease;
+        }
+
+        .menu a:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Container Principal */
+        .container {
+            text-align: center;
+            position: relative;
+        }
+
+        /* Card da Mensagem */
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            text-align: center;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+            margin-top: 20px;
+        }
+
+        .card.show {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        h2 {
+            color: #2c3e50;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        p {
+            color: #555;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        .heart {
+            color: red;
+            font-size: 24px;
+        }
+
+        /* Botão de Revelar */
+        .reveal-button {
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .reveal-button:hover {
+            background: linear-gradient(135deg, #5a0eb2, #1d63e2);
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <!-- Botão para abrir/fechar o menu -->   
+    <button id="menu-toggle" class="menu-toggle">     
+        <i class="fas fa-bars"></i> Menu   
+    </button>    
+    
+    <!-- Menu -->   
+    <div id="menu" class="menu">     
+      <a href="/"><i class="fas fa-home"></i> Receitas Favoritas</a>     
+      <a href="/quis.html"><i class="fas fa-question-circle"></i> Jogos</a>     
+      <a href="/contagem_regre.html"><i class="fas fa-clock"></i> Contagem Regressiva</a>     
+      <a href="/desculpas.html"><i class="fas fa-magic"></i> Pedido de Desculpa</a>     
+      <a href="/video.html"><i class="fas fa-video"></i> Vídeos</a>   
+      <a href="/motivos.html"><i class="fas fa-heart"></i> Motivos</a>   
+    </div>    
+    
+    <div class="container">
+        <button class="reveal-button" onclick="revealMessage()">Revelar Carta</button>
+        <div class="card" id="messageCard">
+            <h2>Querida Ester,</h2>
+            <p>Desculpa por tudo que causei a você. Sei que fui um péssimo amigo e me arrependo profundamente por qualquer dor ou decepção que tenha te feito passar. Nunca foi minha intenção te magoar, mas reconheço que minhas atitudes não foram as melhores.</p>
+            <p>Você é uma pessoa incrível, e eu realmente valorizo nossa amizade. Sinto muito por não ter sido o amigo que você merecia. Sei que errei e que, de alguma forma, te machuquei. Você merece amigos muito melhores do que eu fui.</p>
+            <p>Mas como não posso mudar o passado, só posso te prometer que quero ser uma pessoa melhor daqui para frente. Espero, de coração, ter a chance de reconstruir nossa amizade e mostrar o quanto você é importante para mim.</p>
+            <p>Independente de qualquer coisa, quero que saiba que estarei sempre aqui para você. <span class="heart">❤</span></p>
+            <h3>Me perdoa?</h3>
+        </div>
+    </div>
+    
+    <script>
+        function revealMessage() {
+            document.getElementById("messageCard").classList.add("show");
+        }
+        document.getElementById('menu-toggle').addEventListener('click', () => {       
+            const menu = document.getElementById('menu');       
+            menu.style.left = menu.style.left === '0px' ? '-250px' : '0px';     
+        });   
+    </script>
+</body>
+</html>
