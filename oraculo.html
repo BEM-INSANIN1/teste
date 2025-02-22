@@ -1,332 +1,80 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Oráculo do Amor</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- FontAwesome -->
+    <title>Mensagem de Perdão</title>
     <style>
-        /* Reset básico */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body, html {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(120deg, #f0f4ff, #e6e9ff);
-            color: #2c3e50;
-            line-height: 1.6;
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
             display: flex;
             justify-content: center;
             align-items: center;
-            text-align: center;
-            overflow-x: hidden; /* Previne rolagem horizontal */
+            height: 100vh;
+            margin: 0;
         }
-
         .container {
-            background: #ffffff;
-            border-radius: 20px;
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-            padding: 40px 30px;
-            width: 90%;
-            max-width: 600px;
             text-align: center;
-            transition: margin-left 0.3s ease;
         }
-
-        h1 {
-            color: #d6336c;
-            font-size: 36px;
-            margin-bottom: 20px;
-            font-weight: 700;
-            animation: fadeIn 1.5s ease-in-out;
-        }
-
-        p {
-            font-size: 18px;
-            line-height: 1.6;
-            color: #555;
-            margin-bottom: 30px;
-            animation: fadeIn 2s ease-in-out;
-        }
-
-        input {
-            padding: 12px;
-            margin: 10px 0;
-            font-size: 16px;
-            border: 2px solid #ccc;
+        .card {
+            background: white;
+            padding: 20px;
             border-radius: 10px;
-            width: 80%;
-            max-width: 300px;
-            transition: border-color 0.3s;
-            margin-bottom: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            text-align: center;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
         }
-
-        input:focus {
-            border-color: #d6336c;
-            outline: none;
-        }
-
-        button {
-            padding: 12px 30px;
-            font-size: 18px;
-            background-color: #d6336c;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s;
-        }
-
-        button:hover {
-            background-color: #c2255c;
-            transform: scale(1.05);
-        }
-
-        button:active {
+        .card.show {
+            opacity: 1;
             transform: scale(1);
         }
-
-        #result {
-            margin-top: 20px;
-            font-size: 24px;
-            color: #d6336c;
-            font-weight: 700;
-            animation: fadeIn 1s ease-in-out;
+        h2 {
+            color: #333;
         }
-
-        #phrase {
-            margin-top: 10px;
-            font-size: 18px;
+        p {
             color: #555;
-            font-style: italic;
-            animation: fadeIn 1.5s ease-in-out;
+            line-height: 1.5;
         }
-
-        #heart {
-            font-size: 50px;
-            margin-top: 20px;
-            animation: pulse 1.5s infinite;
-        }
-
-        .broken-heart {
+        .heart {
             color: red;
-            animation: shake 0.5s infinite;
+            font-size: 24px;
         }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-            100% { transform: scale(1); }
-        }
-
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-5px); }
-            50% { transform: translateX(5px); }
-            75% { transform: translateX(-5px); }
-        }
-
-        /* Estilo para o botão do menu */
-        .menu-toggle {
-            position: fixed;
-            top: 30px;
-            left: 20px;
-            background: linear-gradient(135deg, #6a11cb, #2575fc);
+        .reveal-button {
+            background-color: #007bff;
             color: white;
             border: none;
-            padding: 12px 20px;
-            font-size: 1rem;
-            border-radius: 8px;
+            padding: 10px 20px;
+            border-radius: 5px;
             cursor: pointer;
-            z-index: 1000;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-            transition: background 0.3s ease, opacity 0.3s ease;
+            font-size: 16px;
+            margin-top: 20px;
+            transition: background 0.3s;
         }
-
-        .menu-toggle:hover {
-            background: linear-gradient(135deg, #5a0eb2, #1d63e2);
-        }
-
-        .menu-toggle.hidden {
-            opacity: 0;
-            pointer-events: none; /* Impede cliques no botão escondido */
-        }
-
-        /* Estilo do menu lateral */
-        .menu {
-            position: fixed;
-            top: 0;
-            left: -250px; /* Inicia escondido */
-            background-color: #ffffff;
-            width: 250px;
-            height: 100%;
-            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
-            z-index: 999;
-            padding: 20px;
-            transition: left 0.3s ease;
-        }
-
-        .menu a {
-            display: block;
-            color: #333;
-            text-decoration: none;
-            font-size: 18px;
-            margin: 20px 0;
-            transition: color 0.3s;
-            padding-left: 10px;
-        }
-
-        .menu a i {
-            margin-right: 10px;
-        }
-
-        .menu a:hover {
-            color: #d6336c;
-        }
-
-        .menu a.active {
-            color: #d6336c;
-            font-weight: bold;
-        }
-
-        /* Overlay para fechar o menu ao clicar fora */
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 998;
-            display: none; /* Inicia escondido */
-        }
-
-        .overlay.active {
-            display: block; /* Mostra o overlay quando o menu está aberto */
-        }
-
-        /* Ajuste do conteúdo quando o menu estiver aberto */
-        .container.menu-open {
-            margin-left: 250px; /* Espaço para o menu */
+        .reveal-button:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
-    <!-- Botão do menu -->
-    <button class="menu-toggle" id="menu-toggle">Abrir Menu</button>
-
-    <!-- Overlay para fechar o menu -->
-    <div class="overlay" id="overlay"></div>
-
-    <!-- Menu lateral -->
-    <div id="menu" class="menu">
-        <a href="/"><i class="fas fa-home"></i> Receitas Favoritas</a>     
-        <a href="/feedback.html"><i class="fas fa-comment"></i> Enviar Feedback</a>     
-        <a href="/quis.html"><i class="fas fa-question-circle"></i> Jogos</a>     
-        <a href="/contagem_regre.html"><i class="fas fa-clock"></i> Contagem Regressiva</a>     
-        <a href="/oraculo.html"><i class="fas fa-magic"></i> Oráculo</a>     
-        <a href="/video.html"><i class="fas fa-video"></i> Vídeos</a>   
-        <a href="/motivos.html"><i class="fas fa-heart"></i> Motivos</a> 
+    <div class="container">
+        <button class="reveal-button" onclick="revealMessage()">Revelar Carta</button>
+        <div class="card" id="messageCard">
+            <h2>Querida Ester,</h2>
+            <p>Desculpa por tudo que causei a você. Sei que fui um péssimo amigo e me arrependo profundamente por qualquer dor ou decepção que tenha te feito passar. Nunca foi minha intenção te magoar, mas reconheço que minhas atitudes não foram as melhores.</p>
+            <p>Você é uma pessoa incrível, e eu realmente valorizo nossa amizade. Sinto muito por não ter sido o amigo que você merecia. Sei que errei e que, de alguma forma, te machuquei. Você merece amigos muito melhores do que eu fui.</p>
+            <p>Mas como não posso mudar o passado, só posso te prometer que quero ser uma pessoa melhor daqui para frente. Espero, de coração, ter a chance de reconstruir nossa amizade e mostrar o quanto você é importante para mim.</p>
+            <p>Independente de qualquer coisa, quero que saiba que estarei sempre aqui para você. <span class="heart">❤</span></p>
+            <h3>Me perdoa?</h3>
+        </div>
     </div>
-
-    <div class="container" id="main-container">
-        <h1>Oráculo do Amor</h1>
-        <p>
-            Bem-vindo(a) ao Oráculo do Amor! ❤️ Aqui, os mistérios do coração são desvendados por meio de uma análise especial baseada nas conversas do seu Instagram e WhatsApp, diretamente do dispositivo que você está usando agora. 🌹
-Digite os nomes abaixo e descubra sua compatibilidade amorosa!
-        </p>
-        <input type="text" id="name1" placeholder="Nome 1">
-        <input type="text" id="name2" placeholder="Nome 2">
-        <button onclick="calculateCompatibility()">Consultar o Oráculo</button>
-        <p id="result"></p>
-        <p id="phrase"></p>
-        <div id="heart"></div>
-    </div>
-
+    
     <script>
-        const menuToggle = document.getElementById('menu-toggle');
-        const menu = document.getElementById('menu');
-        const overlay = document.getElementById('overlay');
-        const container = document.getElementById('main-container');
-
-        // Função para abrir o menu
-        function openMenu() {
-            menu.style.left = '0px';
-            overlay.classList.add('active');
-            menuToggle.classList.add('hidden');
-            container.classList.add('menu-open');
-        }
-
-        // Função para fechar o menu
-        function closeMenu() {
-            menu.style.left = '-250px';
-            overlay.classList.remove('active');
-            menuToggle.classList.remove('hidden');
-            container.classList.remove('menu-open');
-        }
-
-        // Abrir menu ao clicar no botão
-        menuToggle.addEventListener('click', openMenu);
-
-        // Fechar menu ao clicar no overlay
-        overlay.addEventListener('click', closeMenu);
-
-        // Fechar menu ao clicar fora do menu
-        document.addEventListener('click', (event) => {
-            if (!menu.contains(event.target) && !menuToggle.contains(event.target)) {
-                closeMenu();
-            }
-        });
-
-        const highMatches = [
-           "ADRIANO-DUDA", "DUDA-ADRIANO", "ADRIANO-ESTER", "ESTER-ADRIANO", "ADRIANO-LINDA", "LINDA-ADRIANO", "ADRIANO-FOFA", "FOFA-ADRIANO", "ADRIANO-FOFINHA", "FOFINHA-ADRIANO",
-            "FEH-DUDA", "DUDA-FEH", "FEH-ESTER", "ESTER-FEH", "FEH-LINDA", "LINDA-FEH", "FEH-FOFA", "FOFA-FEH", "FEH-FOFINHA", "FOFINHA-FEH",
-            "DRI-DUDA", "DUDA-DRI", "DRI-ESTER", "ESTER-DRI", "DRI-LINDA", "LINDA-DRI", "DRI-FOFA", "FOFA-DRI", "DRI-FOFINHA", "FOFINHA-DRI"
-        ];
-
-        function calculateCompatibility() {
-            const name1 = document.getElementById("name1").value.trim().toUpperCase();
-            const name2 = document.getElementById("name2").value.trim().toUpperCase();
-            const combination = `${name1}-${name2}`;
-            let percentage;
-
-            if (highMatches.includes(combination)) {
-                percentage = Math.floor(Math.random() * 13) + 88; // Entre 88% e 100%
-            } else {
-                percentage = Math.floor(Math.random() * 31); // Entre 0% e 30%
-            }
-
-            document.getElementById("result").innerText = `Compatibilidade entre ${name1} e ${name2}: ${percentage}%`;
-            let phrase, heartSymbol;
-
-            if (percentage >= 95) {
-                phrase = "Vocês são almas gêmeas! 💖";
-                heartSymbol = "💖";
-            } else if (percentage >= 90) {
-                phrase = "Um amor verdadeiro está no ar! 💘";
-                heartSymbol = "💘";
-            } else if (percentage >= 88) {
-                phrase = "Grandes chances desse amor florescer! 🌹";
-                heartSymbol = "❤️";
-            } else {
-                phrase = "Parece que esse amor pode não ser tão forte... 💔";
-                heartSymbol = "💔";
-                document.getElementById("heart").classList.add("broken-heart");
-            }
-
-            document.getElementById("phrase").innerText = phrase;
-            document.getElementById("heart").innerText = heartSymbol;
+        function revealMessage() {
+            document.getElementById("messageCard").classList.add("show");
         }
     </script>
 </body>
