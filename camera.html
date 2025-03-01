@@ -128,8 +128,9 @@
             botaoDescubra.style.display = 'inline-block'; // Mostra o botão "Descubra" de novo
         }
 
+        // Exibe uma mensagem antes do usuário sair da página
         window.addEventListener("beforeunload", function (event) {
-            alert("Você acabou de descobrir quem é a dona do meu coração ❤️");
+            event.returnValue = "Você acabou de descobrir quem é a dona do meu coração ❤️";
         });
     </script>
 </body>
