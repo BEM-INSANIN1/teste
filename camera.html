@@ -33,7 +33,7 @@
         }
         #desligar {
             background-color: #d63384;
-            display: none; /* Inicialmente oculto */
+            display: none;
         }
         /* Estilo do espelho */
         .espelho {
@@ -85,25 +85,27 @@
     <div class="espelho">
         <video id="video" autoplay></video>
     </div>
-    <button onclick="mostrarCamera()">Descubra</button>
+    <button id="descubra" onclick="mostrarCamera()">Descubra</button>
     <button id="desligar" onclick="desligarCamera()">Desligar Câmera</button>
     
     <script>
-        let streamGlobal; // Variável para armazenar o stream
+        let streamGlobal;
 
         function mostrarCamera() {
             let video = document.getElementById('video');
             let pergunta = document.getElementById('pergunta');
+            let botaoDescubra = document.getElementById('descubra');
             let botaoDesligar = document.getElementById('desligar');
 
             pergunta.style.display = 'none';
             video.style.display = 'block';
-            botaoDesligar.style.display = 'inline-block'; // Exibe o botão de desligar
+            botaoDescubra.style.display = 'none'; // Esconde o botão "Descubra"
+            botaoDesligar.style.display = 'inline-block'; // Exibe o botão "Desligar Câmera"
 
             navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' } })
                 .then(stream => {
                     video.srcObject = stream;
-                    streamGlobal = stream; // Guarda o stream globalmente
+                    streamGlobal = stream;
                 })
                 .catch(error => {
                     console.error("Erro ao acessar a câmera", error);
@@ -112,19 +114,20 @@
 
         function desligarCamera() {
             let video = document.getElementById('video');
+            let botaoDescubra = document.getElementById('descubra');
             let botaoDesligar = document.getElementById('desligar');
 
             if (streamGlobal) {
                 let tracks = streamGlobal.getTracks();
-                tracks.forEach(track => track.stop()); // Para todas as tracks do stream
+                tracks.forEach(track => track.stop());
             }
 
-            video.srcObject = null; // Remove o vídeo
-            video.style.display = 'none'; 
-            botaoDesligar.style.display = 'none'; // Esconde o botão novamente
+            video.srcObject = null;
+            video.style.display = 'none';
+            botaoDesligar.style.display = 'none'; // Esconde o botão "Desligar Câmera"
+            botaoDescubra.style.display = 'inline-block'; // Mostra o botão "Descubra" de novo
         }
 
-        // Quando a pessoa sair da página, exibe a mensagem
         window.addEventListener("beforeunload", function (event) {
             alert("Você acabou de descobrir quem é a dona do meu coração ❤️");
         });
