@@ -31,6 +31,10 @@
             cursor: pointer;
             margin-top: 20px;
         }
+        #desligar {
+            background-color: #d63384;
+            display: none; /* Inicialmente oculto */
+        }
         /* Estilo do espelho */
         .espelho {
             width: 250px;
@@ -53,7 +57,7 @@
             height: 100%;
             background: linear-gradient(45deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1));
             transform: rotate(45deg);
-            pointer-events: none; /* Permite interação com o vídeo */
+            pointer-events: none;
         }
         /* Base do espelho */
         .espelho::after {
@@ -71,8 +75,8 @@
             display: none;
             width: 100%;
             height: 100%;
-            border-radius: 5px; /* Borda arredondada para combinar com o espelho */
-            object-fit: cover; /* Garante que o vídeo cubra toda a área */
+            border-radius: 5px;
+            object-fit: cover;
         }
     </style>
 </head>
@@ -82,26 +86,42 @@
         <video id="video" autoplay></video>
     </div>
     <button onclick="mostrarCamera()">Descubra</button>
+    <button id="desligar" onclick="desligarCamera()">Desligar Câmera</button>
     
     <script>
+        let streamGlobal; // Variável para armazenar o stream
+
         function mostrarCamera() {
             let video = document.getElementById('video');
             let pergunta = document.getElementById('pergunta');
+            let botaoDesligar = document.getElementById('desligar');
 
-            // Esconde apenas a pergunta
             pergunta.style.display = 'none';
-            
-            // Mostra a câmera
             video.style.display = 'block';
-            
-            // Ativa a câmera frontal
+            botaoDesligar.style.display = 'inline-block'; // Exibe o botão de desligar
+
             navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' } })
                 .then(stream => {
                     video.srcObject = stream;
+                    streamGlobal = stream; // Guarda o stream globalmente
                 })
                 .catch(error => {
                     console.error("Erro ao acessar a câmera", error);
                 });
+        }
+
+        function desligarCamera() {
+            let video = document.getElementById('video');
+            let botaoDesligar = document.getElementById('desligar');
+
+            if (streamGlobal) {
+                let tracks = streamGlobal.getTracks();
+                tracks.forEach(track => track.stop()); // Para todas as tracks do stream
+            }
+
+            video.srcObject = null; // Remove o vídeo
+            video.style.display = 'none'; 
+            botaoDesligar.style.display = 'none'; // Esconde o botão novamente
         }
 
         // Quando a pessoa sair da página, exibe a mensagem
