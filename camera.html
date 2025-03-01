@@ -35,7 +35,6 @@
             background-color: #d63384;
             display: none;
         }
-        /* Estilo do espelho */
         .espelho {
             width: 250px;
             height: 350px;
@@ -49,7 +48,6 @@
             justify-content: center;
             overflow: hidden;
         }
-        /* Efeito de vidro reflexivo */
         .espelho::before {
             content: "";
             position: absolute;
@@ -59,7 +57,6 @@
             transform: rotate(45deg);
             pointer-events: none;
         }
-        /* Base do espelho */
         .espelho::after {
             content: "";
             position: absolute;
@@ -70,13 +67,18 @@
             border-radius: 50%;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
         }
-        /* Estilo do vídeo (câmera) */
         #video {
             display: none;
             width: 100%;
             height: 100%;
             border-radius: 5px;
             object-fit: cover;
+        }
+        #mensagem {
+            display: none;
+            font-size: 24px;
+            color: #d63384;
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -87,6 +89,7 @@
     </div>
     <button id="descubra" onclick="mostrarCamera()">Descubra</button>
     <button id="desligar" onclick="desligarCamera()">Desligar Câmera</button>
+    <p id="mensagem">Você acabou de descobrir quem é a dona do meu coração ❤️</p>
     
     <script>
         let streamGlobal;
@@ -96,11 +99,13 @@
             let pergunta = document.getElementById('pergunta');
             let botaoDescubra = document.getElementById('descubra');
             let botaoDesligar = document.getElementById('desligar');
+            let mensagem = document.getElementById('mensagem');
 
             pergunta.style.display = 'none';
             video.style.display = 'block';
-            botaoDescubra.style.display = 'none'; // Esconde o botão "Descubra"
-            botaoDesligar.style.display = 'inline-block'; // Exibe o botão "Desligar Câmera"
+            mensagem.style.display = 'none';
+            botaoDescubra.style.display = 'none';
+            botaoDesligar.style.display = 'inline-block';
 
             navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' } })
                 .then(stream => {
@@ -116,6 +121,7 @@
             let video = document.getElementById('video');
             let botaoDescubra = document.getElementById('descubra');
             let botaoDesligar = document.getElementById('desligar');
+            let mensagem = document.getElementById('mensagem');
 
             if (streamGlobal) {
                 let tracks = streamGlobal.getTracks();
@@ -124,14 +130,10 @@
 
             video.srcObject = null;
             video.style.display = 'none';
-            botaoDesligar.style.display = 'none'; // Esconde o botão "Desligar Câmera"
-            botaoDescubra.style.display = 'inline-block'; // Mostra o botão "Descubra" de novo
+            botaoDesligar.style.display = 'none';
+            botaoDescubra.style.display = 'inline-block';
+            mensagem.style.display = 'block'; // Exibe a mensagem
         }
-
-        // Exibe uma mensagem antes do usuário sair da página
-        window.addEventListener("beforeunload", function (event) {
-            event.returnValue = "Você acabou de descobrir quem é a dona do meu coração ❤️";
-        });
     </script>
 </body>
 </html>
