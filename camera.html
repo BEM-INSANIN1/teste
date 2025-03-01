@@ -4,37 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Surpresa Especial</title>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <style>
-        body {
-            text-align: center;
-            font-family: Arial, sans-serif;
-            background-color: #ffdde1;
-            color: #d63384;
+        /* Reset básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(120deg, #f0f4ff, #e6e9ff);
+            color: #2c3e50;
+            line-height: 1.6;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
-            margin: 0;
+            text-align: center;
         }
-        #pergunta {
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
+
         button {
-            background-color: #ff4081;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
             color: white;
             border: none;
-            padding: 10px 20px;
-            font-size: 18px;
-            border-radius: 5px;
+            padding: 12px 24px;
+            font-size: 1rem;
+            border-radius: 8px;
             cursor: pointer;
+            transition: all 0.3s ease;
             margin-top: 20px;
         }
-        #desligar {
-            background-color: #d63384;
-            display: none;
+
+        button:hover {
+            background: linear-gradient(135deg, #5a0eb2, #1d63e2);
+            transform: scale(1.05);
         }
+
         .espelho {
             width: 250px;
             height: 350px;
@@ -48,25 +58,7 @@
             justify-content: center;
             overflow: hidden;
         }
-        .espelho::before {
-            content: "";
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1));
-            transform: rotate(45deg);
-            pointer-events: none;
-        }
-        .espelho::after {
-            content: "";
-            position: absolute;
-            bottom: -50px;
-            width: 100px;
-            height: 100px;
-            background: #d63384;
-            border-radius: 50%;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-        }
+
         #video {
             display: none;
             width: 100%;
@@ -74,6 +66,7 @@
             border-radius: 5px;
             object-fit: cover;
         }
+
         #mensagem {
             display: none;
             font-size: 24px;
@@ -88,25 +81,23 @@
         <video id="video" autoplay></video>
     </div>
     <button id="descubra" onclick="mostrarCamera()">Descubra</button>
-    <button id="desligar" onclick="desligarCamera()">Desligar Câmera</button>
+    <button id="desligar" onclick="desligarCamera()" style="display:none;">Desligar Câmera</button>
     <p id="mensagem">Você acabou de descobrir quem é a pessoa mais linda e bondosa desse mundo, a minha melhor amiga Ester ❤️</p>
+    <button onclick="voltarParaIndex()">Voltar</button>
     
     <script>
         let streamGlobal;
-
         function mostrarCamera() {
             let video = document.getElementById('video');
             let pergunta = document.getElementById('pergunta');
             let botaoDescubra = document.getElementById('descubra');
             let botaoDesligar = document.getElementById('desligar');
             let mensagem = document.getElementById('mensagem');
-
             pergunta.style.display = 'none';
             video.style.display = 'block';
             mensagem.style.display = 'none';
             botaoDescubra.style.display = 'none';
             botaoDesligar.style.display = 'inline-block';
-
             navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' } })
                 .then(stream => {
                     video.srcObject = stream;
@@ -116,23 +107,23 @@
                     console.error("Erro ao acessar a câmera", error);
                 });
         }
-
         function desligarCamera() {
             let video = document.getElementById('video');
             let botaoDescubra = document.getElementById('descubra');
             let botaoDesligar = document.getElementById('desligar');
             let mensagem = document.getElementById('mensagem');
-
             if (streamGlobal) {
                 let tracks = streamGlobal.getTracks();
                 tracks.forEach(track => track.stop());
             }
-
             video.srcObject = null;
             video.style.display = 'none';
             botaoDesligar.style.display = 'none';
             botaoDescubra.style.display = 'inline-block';
-            mensagem.style.display = 'block'; // Exibe a mensagem
+            mensagem.style.display = 'block';
+        }
+        function voltarParaIndex() {
+            window.location.href = 'index.html';
         }
     </script>
 </body>
