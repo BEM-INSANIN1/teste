@@ -15,14 +15,7 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-        }
-        #video {
-            display: none;
-            width: 300px;
-            border-radius: 10px;
-            opacity: 0;
-            transform: scale(0.8);
-            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+            margin: 0;
         }
         #pergunta {
             font-size: 24px;
@@ -36,64 +29,76 @@
             font-size: 18px;
             border-radius: 5px;
             cursor: pointer;
-            margin-top: 10px;
-            opacity: 0;
-            transform: translateY(-10px);
-            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
-        }
-        #desligar {
-            display: none;
-        }
-        #mensagem {
-            display: none;
-            font-size: 36px;
-            font-weight: bold;
-            color: #d63384;
             margin-top: 20px;
-            opacity: 0;
-            transform: scale(0.8);
-            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+        }
+        /* Estilo do espelho */
+        .espelho {
+            width: 250px;
+            height: 350px;
+            background: #f0f0f0;
+            border: 15px solid #d63384;
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        /* Efeito de vidro reflexivo */
+        .espelho::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1));
+            transform: rotate(45deg);
+            pointer-events: none; /* Permite interação com o vídeo */
+        }
+        /* Base do espelho */
+        .espelho::after {
+            content: "";
+            position: absolute;
+            bottom: -50px;
+            width: 100px;
+            height: 100px;
+            background: #d63384;
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        }
+        /* Estilo do vídeo (câmera) */
+        #video {
+            display: none;
+            width: 100%;
+            height: 100%;
+            border-radius: 5px; /* Borda arredondada para combinar com o espelho */
+            object-fit: cover; /* Garante que o vídeo cubra toda a área */
         }
     </style>
 </head>
 <body>
-    <div id="pergunta">Quem é a pessoa mais linda do mundo?</div>
-    <button id="descobrir" onclick="mostrarCamera()" style="opacity:1; transform:translateY(0);">Descubra</button>
-    <video id="video" autoplay></video>
-    <button id="desligar" onclick="desligarCamera()">Desligar Câmera</button>
-    <div id="mensagem">Você acabou de descobrir quem é a dona do meu coração ❤️</div>
+    <div id="pergunta">Espelho, espelho meu, quem é a pessoa mais linda?</div>
+    <div class="espelho">
+        <video id="video" autoplay></video>
+    </div>
+    <button onclick="mostrarCamera()">Descubra</button>
     
     <script>
-        let stream;
-        
         function mostrarCamera() {
             let video = document.getElementById('video');
             let pergunta = document.getElementById('pergunta');
-            let descobrirBotao = document.getElementById('descobrir');
-            let desligarBotao = document.getElementById('desligar');
+            let botao = document.querySelector('button');
 
-            // Esconde a pergunta e o botão de descobrir
+            // Esconde a pergunta e o botão
             pergunta.style.display = 'none';
-            descobrirBotao.style.display = 'none';
+            botao.style.display = 'none';
             
-            // Mostra a câmera com animação
+            // Mostra a câmera
             video.style.display = 'block';
-            setTimeout(() => {
-                video.style.opacity = '1';
-                video.style.transform = 'scale(1)';
-            }, 10);
-            
-            // Mostra o botão de desligar com animação
-            desligarBotao.style.display = 'block';
-            setTimeout(() => {
-                desligarBotao.style.opacity = '1';
-                desligarBotao.style.transform = 'translateY(0)';
-            }, 300);
             
             // Ativa a câmera frontal
             navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' } })
-                .then(mediaStream => {
-                    stream = mediaStream;
+                .then(stream => {
                     video.srcObject = stream;
                 })
                 .catch(error => {
@@ -101,35 +106,10 @@
                 });
         }
 
-        function desligarCamera() {
-            let video = document.getElementById('video');
-            let desligarBotao = document.getElementById('desligar');
-            let mensagem = document.getElementById('mensagem');
-            
-            // Para a transmissão da câmera
-            if (stream) {
-                let tracks = stream.getTracks();
-                tracks.forEach(track => track.stop());
-            }
-            
-            // Esconde o vídeo e o botão de desligar com animação
-            video.style.opacity = '0';
-            video.style.transform = 'scale(0.8)';
-            desligarBotao.style.opacity = '0';
-            desligarBotao.style.transform = 'translateY(-10px)';
-            
-            setTimeout(() => {
-                video.style.display = 'none';
-                desligarBotao.style.display = 'none';
-                
-                // Exibe a mensagem especial com animação
-                mensagem.style.display = 'block';
-                setTimeout(() => {
-                    mensagem.style.opacity = '1';
-                    mensagem.style.transform = 'scale(1)';
-                }, 10);
-            }, 500);
-        }
+        // Quando a pessoa sair da página, exibe a mensagem
+        window.addEventListener("beforeunload", function (event) {
+            alert("Você acabou de descobrir quem é a dona do meu coração ❤️");
+        });
     </script>
 </body>
 </html>
