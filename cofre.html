@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cofre do Tempo</title>
+    <style>
+        /* Reset básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(120deg, #f0f4ff, #e6e9ff);
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+
+        /* Estilos para o conteúdo principal */
+        .container {
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #6a11cb;
+            margin-bottom: 15px;
+        }
+
+        /* Estilos para o cofre */
+        #cofre {
+            width: 220px;
+            height: 220px;
+            background: radial-gradient(circle, #bbb, #888);
+            display: inline-block;
+            text-align: center;
+            position: relative;
+            border-radius: 10px;
+            border: 5px solid #666;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            transition: transform 0.5s ease;
+        }
+
+        .porta {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, #999, #777);
+            position: absolute;
+            left: 0;
+            top: 0;
+            border-radius: 10px;
+            transition: transform 1s ease-in-out;
+            transform-origin: left;
+        }
+
+        .cadeado {
+            font-size: 30px;
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .cofre-aberto .porta {
+            transform: rotateY(110deg);
+        }
+
+        .cofre-aberto .cadeado {
+            display: none;
+        }
+
+        #conteudoCofre {
+            display: none; /* Conteúdo oculto inicialmente */
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            text-align: center;
+        }
+
+        #foto {
+            width: 70px;
+            display: block;
+            margin: auto;
+            max-width: 70%;
+        }
+
+        #mensagem {
+            font-size: 12px;
+            margin-top: 10px;
+            color: #333;
+            line-height: 1.4;
+        }
+
+        input, button {
+            padding: 12px;
+            font-size: 16px;
+            margin-top: 20px;
+            border-radius: 8px;
+            border: 2px solid #ddd;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        input:focus, button:hover {
+            border-color: #6a11cb;
+            box-shadow: 0 0 8px rgba(37, 117, 252, 0.3);
+        }
+
+        button {
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: white;
+            cursor: pointer;
+        }
+
+        button:active {
+            background: linear-gradient(135deg, #5a0eb2, #1d63e2);
+        }
+
+        .dica-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 15px;
+            background-color: #2575fc;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .dica-btn:hover {
+            background-color: #1d63e2;
+        }
+
+        #temporizador {
+            font-size: 1.5rem;
+            color: #333;
+            margin-top: 30px;
+            font-weight: bold;
+        }
+
+        #mensagem-instrucoes {
+            margin-top: 20px;
+            color: #e74c3c;
+            font-weight: bold;
+        }
+
+        /* Botão de voltar */
+        #btnVoltar {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #2575fc;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        #btnVoltar:hover {
+            background-color: #1d63e2;
+        }
+
+        #btnVoltar:active {
+            background-color: #5a0eb2;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Botão de Voltar -->
+    <button id="btnVoltar" onclick="window.location.href='/index.html'">Voltar</button>
+
+    <div class="container">
+        <h1>Cofre do Tempo</h1>
+        <p>Descubra o código secreto para abrir o cofre!</p>
+        
+        <div id="cofre">
+            <div class="porta">
+                <div class="cadeado">🔒</div>
+            </div>
+            <div id="conteudoCofre">
+                <img id="foto" src="images/Eventoeueela.jpg" alt="Minha Foto">
+                <p id="mensagem">Ester, muito obrigado por ser minha melhor amiga, ter conhecido você foi a melhor coisa que aconteceu na minha, muito obrigado por todo esse tempo que somos amigos! 💖</p>
+            </div>
+        </div>
+        
+        <div id="mensagem-instrucoes">
+            <p>⚠️ Você precisa digitar a senha correta para abrir o cofre.</p>
+        </div>
+        
+        <br><br>
+        <input type="password" id="senha" placeholder="Digite a senha" disabled>
+        <button onclick="verificarSenha()" id="abrirCofreBtn" disabled>Abrir Cofre</button>
+        
+        <div id="dica-container">
+            <button id="dica-btn" class="dica-btn" onclick="mostrarDica()">Revelar Dica</button>
+            <p id="dica"></p>
+            <p id="alertaAnotacao" class="alerta-anotacao" style="display: none;">⚠️ Anote esta dica, pois ela será substituída amanhã!</p>
+        </div>
+
+        <!-- Exibe o temporizador -->
+        <p id="temporizador"></p>
+
+        <!-- Mensagem de tempo expirado -->
+        <p id="tempoExpirado" class="tempo-expirado" style="display: none;">O tempo para resolver o cofre expirou!</p>
+    </div>
+
+    <script>
+        const senhaCorreta = "0511";
+        const dicas = [
+            "Dica 1: É uma data especial...",
+            "Dica 2: Um dos nossos encontros de amigos.",
+            "Dica 3: Dia de cinema que deu errado",
+        ];
+
+        // Função para mostrar a dica do dia
+        const hoje = new Date();
+        const dia = hoje.getDate();
+        let indiceDica = dia - 2;  // Ajuste para começar no dia 2 como o primeiro dia de dica (dia 2 -> índice 0)
+
+        if (indiceDica < 0) {
+            indiceDica = 0;
+        }
+
+        function mostrarDica() {
+            // Exibe a dica correspondente ao dia
+            document.getElementById("dica").innerText = dicas[indiceDica];
+            document.getElementById("alertaAnotacao").style.display = "inline"; // Exibe a recomendação para anotar a dica
+            document.getElementById("dica-btn").style.display = "none";
+            // Habilita o campo de senha e o botão de abrir cofre
+            document.getElementById("senha").disabled = false;
+            document.getElementById("abrirCofreBtn").disabled = false;
+        }
+
+        function verificarSenha() {
+            let senhaDigitada = document.getElementById("senha").value;
+            let cofre = document.getElementById("cofre");
+
+            if (senhaDigitada === senhaCorreta) {
+                cofre.classList.add("cofre-aberto");
+                setTimeout(() => {
+                    document.getElementById("conteudoCofre").style.display = "flex"; // Exibe o conteúdo do cofre
+                }, 1000); 
+            } else {
+                alert("Senha incorreta! Tente novamente.");
+            }
+        }
+    </script>
+</body>
+</html>
