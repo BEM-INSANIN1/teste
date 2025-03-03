@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prêmio Surpresa</title>
+  <style>
+    body {
+      font-family: 'Georgia', serif;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      text-align: center;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      max-width: 600px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 36px;
+      margin-bottom: 20px;
+      color: #ffd700;
+    }
+
+    p {
+      font-size: 18px;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .botao-misterio {
+      background: #ff6f61;
+      color: #fff;
+      border: none;
+      padding: 15px 30px;
+      font-size: 18px;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      margin: 10px;
+    }
+
+    .botao-misterio:hover {
+      background: #ff4a3d;
+    }
+
+    .premio-escondido {
+      display: none;
+      margin-top: 30px;
+      background: #1e3c72;
+      color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 600px;
+      box-sizing: border-box;
+    }
+
+    .premio-escondido h2 {
+      font-size: 28px;
+      color: #ffd700;
+      margin-bottom: 20px;
+    }
+
+    .premio-escondido p {
+      font-size: 16px;
+      color: #fff;
+    }
+
+    .decoracao {
+      font-size: 30px;
+      color: #ffd700;
+      margin-top: 20px;
+    }
+
+    .trofeu {
+      font-size: 60px;
+      color: #ffd700;
+      margin-bottom: 20px;
+    }
+
+    .assinatura {
+      font-family: 'Brush Script MT', cursive;
+      font-size: 24px;
+      color: #ffd700;
+      margin-top: 20px;
+    }
+
+    ul {
+      text-align: left;
+      margin: 20px 0;
+      padding-left: 20px;
+    }
+
+    ul li {
+      margin-bottom: 10px;
+    }
+
+    .botao-container {
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Você tem um prêmio misterioso!</h1>
+    <p>Algo incrível está esperando por você... Mas, para descobrir, você precisa clicar no botão abaixo. Será que você está pronta para a surpresa?</p>
+    <button class="botao-misterio" onclick="mostrarPremio()">Clique aqui para revelar</button>
+
+    <div class="premio-escondido" id="premio">
+      <div class="trofeu">🏆</div>
+      <h2>Prêmio Melhor Amiga do Mundo</h2>
+      <div class="mensagem">
+        <p>Para a incrível Ester Araujo Ribeiro,</p>
+        <p>Hoje é o dia de celebrar você, a pessoa mais incrível que já conheci. Você é a definição de amizade verdadeira: sempre presente, cheia de amor, risadas e conselhos que salvam o dia. Você merece esse prêmio porque:</p>
+        <ul>
+          <li>Seu sorriso ilumina até os dias mais cinzentos.</li>
+          <li>Você transforma qualquer momento em algo especial.</li>
+          <li>Você está sempre lá, não importa a hora ou o lugar.</li>
+          <li>Seus conselhos são sábios e sempre me ajudam a encontrar o caminho certo.</li>
+          <li>Você me faz rir até a barriga doer, mesmo nos dias mais difíceis.</li>
+          <li>Você é a pessoa com quem eu posso ser 100% eu mesma, sem medo de julgamentos.</li>
+          <li>Você me inspira a ser uma pessoa melhor todos os dias.</li>
+          <li>Você tem um coração gigante e uma capacidade incrível de amar.</li>
+          <li>Você sabe exatamente o que dizer para me animar quando estou pra baixo.</li>
+          <li>Você é a prova de que amizades verdadeiras existem e duram para sempre.</li>
+          <li>E, claro, porque você é simplesmente a MELHOR!</li>
+        </ul>
+        <p>Obrigada por ser minha amiga. Eu te amo mais do que as palavras podem expressar!</p>
+      </div>
+      <div class="assinatura">Com todo o meu carinho,<br>Adriano Felisberto dos Santos</div>
+      <div class="decoracao">✨🌟💖</div>
+      <div class="botao-container">
+        <a href="images/Certificado_Melhor_Amiga.pdf" download class="botao-misterio">Baixar como PDF</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function mostrarPremio() {
+      const premio = document.getElementById('premio');
+      const botao = document.querySelector('.botao-misterio');
+      premio.style.display = 'block';
+      botao.style.display = 'none';
+      setTimeout(() => {
+        alert("🎉 Parabéns, você descobriu o prêmio! 🎉");
+      }, 500);
+    }
+  </script>
+</body>
+</html>
