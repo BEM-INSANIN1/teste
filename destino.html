@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O Jogo do Destino Instantâneo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+            background-color: #f4f4f4;
+        }
+        #destino {
+            font-size: 20px;
+            margin-top: 20px;
+            color: #333;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        input {
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <h1>O Jogo do Destino Instantâneo</h1>
+    <p>Digite seu nome e descubra seu destino absurdo!</p>
+    <input type="text" id="nome" placeholder="Digite seu nome">
+    <button onclick="gerarDestino()">Descobrir meu destino</button>
+    <p id="destino"></p>
+
+    <!-- Botão para voltar à página inicial -->
+    <button onclick="voltarParaIndex()">Voltar</button>
+
+    <script>
+        function gerarDestino() {
+            const nome = document.getElementById("nome").value.trim();
+            
+            if (!nome) {
+                document.getElementById("destino").innerText = "Por favor, digite seu nome para descobrir seu destino.";
+                return;
+            }
+            
+            if (nome.toLowerCase() === "ester") {
+                document.getElementById("destino").innerHTML = `
+                    Ester, vamos ser realistas... com o talento que você tem, dá até para um dia você ser tornar a futura presidente do Brasil! 
+                    Você manda bem demais em edição de vídeos, design, biologia e, sinceramente, no que quiser. 
+                    O mundo ainda vai ver até onde sua criatividade e dedicação podem te levar. 
+                    Além disso, você tem um amigo que está disposto a te ajudar independente da situação, para que você seja alguém alegre e nunca se sinta sozinha. ❤️
+                    <br><br>
+                    <img src="images/A_MENINA_QUE_EU_AMO.jpg" alt="Ester e seu amigo" width="300" style="border-radius: 10px; box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);">
+                `;
+                return;
+            }
+
+            if (nome.toLowerCase() === "adriano") {
+                document.getElementById("destino").innerText = "Olha, Adriano... sinceramente, você não tem nada de mais. Mas pensa pelo lado bom, você é amigo da melhor pessoa desse mundo, a Ester.";
+                return;
+            }
+            
+            const destinos = [
+                "Não consigo analisar o destino dessa pessoa, pois não está no banco de dados.",
+            ];
+            
+            const destinoEscolhido = destinos[Math.floor(Math.random() * destinos.length)];
+            document.getElementById("destino").innerText = `${nome}, ${destinoEscolhido}`;
+        }
+
+        function voltarParaIndex() {
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>
