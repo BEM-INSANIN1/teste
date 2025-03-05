@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Notas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> <!-- Link para os ícones -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body, html {
+            height: 100%;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(120deg, #f0f4ff, #e6e9ff);
+            color: #2c3e50;
+            text-align: center;
+        }
+        table {
+            margin: auto;
+            border-collapse: collapse;
+            width: 80%;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+        }
+        th {
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: white;
+        }
+        button {
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+        button:hover {
+            background: linear-gradient(135deg, #5a0eb2, #1d63e2);
+            transform: scale(1.05);
+        }
+        input[type='text'], select, input[type='number'] {
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            margin: 5px;
+        }
+        input:focus, select:focus {
+            border-color: #2575fc;
+            outline: none;
+            box-shadow: 0 0 5px rgba(37, 117, 252, 0.5);
+        }
+        .hidden { display: none; }
+
+        /* Estilos para o menu */
+        .menu {
+            position: fixed;
+            top: 0;
+            left: -250px;
+            width: 250px;
+            height: 100%;
+            background: #333;
+            padding-top: 60px;
+            transition: left 0.3s ease;
+            z-index: 1000;
+            overflow-y: auto; /* Adiciona barra de rolagem vertical */
+        }
+        .menu a {
+            display: block;
+            padding: 15px;
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            border-bottom: 1px solid #444;
+        }
+        .menu a:hover {
+            background: #444;
+        }
+        .menu-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: #6a11cb;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+        .menu-toggle:hover {
+            background: #5a0eb2;
+        }
+        .menu.active {
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Botão para abrir/fechar o menu -->
+    <button id="menu-toggle" class="menu-toggle">
+        <i class="fas fa-bars"></i> Menu
+    </button>
+
+    <!-- Menu -->
+    <div id="menu" class="menu">
+        <a href="/"><i class="fas fa-home"></i> Receitas Favoritas</a>
+        <a href="/feedback.html"><i class="fas fa-comment"></i> Enviar Feedback</a>
+        <a href="/quis.html"><i class="fas fa-question-circle"></i> Jogos</a>
+        <a href="/contagem_regre.html"><i class="fas fa-clock"></i> Contagem Regressiva</a>
+        <a href="/desculpas.html"><i class="fas fa-magic"></i> Pedido de Desculpa</a>
+        <a href="/motivos.html"><i class="fas fa-heart"></i> Motivos</a>
+        <a href="/destino.html"><i class="fas fa-question-circle"></i> Jogo do Destino</a>
+        <a href="/boletim.html"><i class="fas fa-file-alt"></i> Boletim</a>
+    </div>
+
+    <!-- Conteúdo do Boletim (não alterado) -->
+    <h1>Registro de Notas</h1>
+    <label for="curso">Nome do Curso:</label>
+    <input type="text" id="curso" placeholder="Digite o curso">
+    <br><br>
+    <label for="tipo">Selecione o tipo de período:</label>
+    <select id="tipo">
+        <option value="bimestre">4 Bimestres</option>
+        <option value="semestre">2 Semestres</option>
+    </select>
+    <br><br>
+    <button onclick="adicionarMateria()">Adicionar Matéria</button>
+    <button onclick="editarTodasMaterias()">Editar Todas</button>
+    <button onclick="removerMateria()">Remover Matéria</button>
+    <div id="materias"></div>
+    <br>
+    <button onclick="gerarTabela()">Gerar Tabela</button>
+    <br><br>
+    <div id="tabelaNotas" class="hidden"></div>
+
+    <!-- Script para o menu interativo -->
+    <script>
+        document.getElementById('menu-toggle').addEventListener('click', () => {
+            const menu = document.getElementById('menu');
+            menu.classList.toggle('active');
+        });
+    </script>
+
+    <!-- Script atualizado para incluir a validação do nome do curso -->
+    <script>
+        let materias = JSON.parse(localStorage.getItem('materias')) || [];
+        let curso = localStorage.getItem('curso') || ""; // Recupera o curso, se existir
+        document.getElementById('curso').value = curso; // Preenche o campo do curso com o valor salvo
+        atualizarListaMaterias();
+
+        function salvarCurso() {
+            let nomeCurso = document.getElementById('curso').value;
+            localStorage.setItem('curso', nomeCurso); // Salva o nome do curso no localStorage
+        }
+
+        function validarCurso() {
+            let curso = document.getElementById('curso').value;
+            if (!curso.trim()) {
+                alert("Por favor, insira o nome do curso antes de prosseguir.");
+                return false;
+            }
+            return true;
+        }
+
+        function adicionarMateria() {
+            if (!validarCurso()) return;
+            let nomeMateria = prompt("Digite o nome da matéria:");
+            if (nomeMateria) {
+                materias.push(nomeMateria);
+                salvarMaterias();
+                atualizarListaMaterias();
+            }
+        }
+
+        function editarTodasMaterias() {
+            if (!validarCurso()) return;
+            materias = materias.map(materia => prompt("Editar matéria:", materia) || materia);
+            salvarMaterias();
+            atualizarListaMaterias();
+            gerarTabela();
+        }
+
+        function removerMateria() {
+            if (!validarCurso()) return;
+            if (materias.length === 0) {
+                alert("Não há matérias para remover!");
+                return;
+            }
+            let materiaParaRemover = prompt("Digite o nome da matéria que deseja remover:");
+            if (materiaParaRemover && materias.includes(materiaParaRemover)) {
+                materias = materias.filter(materia => materia !== materiaParaRemover);
+                salvarMaterias();
+                atualizarListaMaterias();
+                gerarTabela();
+            } else {
+                alert("Matéria não encontrada!");
+            }
+        }
+
+        function salvarMaterias() {
+            localStorage.setItem('materias', JSON.stringify(materias));
+        }
+
+        function gerarTabela() {
+            if (!validarCurso()) return;
+            if (materias.length === 0) {
+                alert("Adicione pelo menos uma matéria!");
+                return;
+            }
+
+            let tipo = document.getElementById("tipo").value;
+            let colunas = tipo === "bimestre" ? 4 : 2;
+
+            let tabelaHTML = "<table><tr><th>Matéria</th>";
+            for (let i = 1; i <= colunas; i++) {
+                tabelaHTML += `<th>${tipo === 'bimestre' ? 'Bimestre' : 'Semestre'} ${i}</th>`;
+            }
+            tabelaHTML += "<th>Média</th><th>Status</th></tr>";
+
+            materias.forEach((materia, matIndex) => {
+                tabelaHTML += `<tr><td>${materia}</td>`;
+                let notasInputs = [];
+                for (let i = 0; i < colunas; i++) {
+                    notasInputs.push(`<input type='number' min='0' max='10' step='0.1' class='nota' data-materia='${matIndex}' data-periodo='${i}' onchange='calcularMedia(${matIndex})'>`);
+                }
+                tabelaHTML += notasInputs.map(input => `<td>${input}</td>`).join('');
+                tabelaHTML += `<td id='media-${matIndex}'>-</td><td id='status-${matIndex}'>-</td></tr>`;
+            });
+
+            tabelaHTML += "</table>";
+            document.getElementById("tabelaNotas").innerHTML = tabelaHTML;
+            document.getElementById("tabelaNotas").classList.remove("hidden");
+        }
+
+        // Salva o nome do curso sempre que o campo de curso for alterado
+        document.getElementById('curso').addEventListener('input', salvarCurso);
+    </script>
+</body>
+</html>
