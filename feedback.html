@@ -7,6 +7,59 @@
   <link rel="stylesheet" href="feedback.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    /* Estilos para o menu */
+    .menu {
+      position: fixed;
+      top: 0;
+      left: -250px;
+      width: 250px;
+      height: 100%;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      color: white;
+      padding: 20px;
+      box-shadow: 4px 0 10px rgba(0, 0, 0, 0.15);
+      transition: left 0.3s ease;
+      z-index: 999;
+      border-radius: 12px;
+      overflow-y: auto; /* Adiciona barra de rolagem vertical */
+    }
+
+    .menu a {
+      display: block;
+      color: white;
+      text-decoration: none;
+      font-size: 1.1rem;
+      margin-bottom: 15px;
+      padding: 12px 20px;
+      border-radius: 8px;
+      transition: background 0.3s ease;
+    }
+
+    .menu a:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .menu-toggle {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      z-index: 1000;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      transition: background 0.3s ease;
+    }
+
+    .menu-toggle:hover {
+      background: linear-gradient(135deg, #5a0eb2, #1d63e2);
+    }
+  </style>
 </head>
 <body>
    <!-- Botão para abrir/fechar o menu -->
@@ -15,19 +68,17 @@
   </button>
 
   <!-- Menu -->
-<div id="menu" class="menu">
-  <a href="/"><i class="fas fa-home"></i> Receitas Favoritas</a>     
-  <a href="/feedback.html"><i class="fas fa-comment"></i> Enviar Feedback</a>     
-  <a href="/quis.html"><i class="fas fa-question-circle"></i> Jogos</a>     
-  <a href="/contagem_regre.html"><i class="fas fa-clock"></i> Contagem Regressiva</a>     
-  <a href="/oraculo.html"><i class="fas fa-magic"></i> Oráculo</a>
-  <a href="/camera.html"><i class="fas fa-mirror"></i> Espelho</a>
-  <a href="/cofre.html"><i class="fas fa-lock"></i> Desafio do Cofre </a>
-  <a href="/premio.html"><i class="fas fa-gift"></i> Prêmio Surpresa</a>
-  <a href="/motivos.html"><i class="fas fa-heart"></i> Motivos</a> 
-  <a href="/destino.html"><i class="fas fa-question-circle"></i> Jogo do Destino</a>
+  <div id="menu" class="menu">
+    <a href="/"><i class="fas fa-home"></i> Receitas Favoritas</a>     
+    <a href="/feedback.html"><i class="fas fa-comment"></i> Enviar Feedback</a>     
+    <a href="/quis.html"><i class="fas fa-question-circle"></i> Jogos</a>     
+    <a href="/contagem_regre.html"><i class="fas fa-clock"></i> Contagem Regressiva</a>     
+    <a href="/desculpas.html"><i class="fas fa-magic"></i> Pedido de Desculpa</a>     
+    <a href="/motivos.html"><i class="fas fa-heart"></i> Motivos</a> 
+    <a href="/destino.html"><i class="fas fa-question-circle"></i> Jogo do Destino</a>     
+    <a href="/boletim.html"><i class="fas fa-file-alt"></i> Boletim</a>   
+  </div>
 
-</div>
   <!-- Conteúdo Principal -->
   <main class="container">
     <h2>Deixe seu feedback sobre o site!</h2>
