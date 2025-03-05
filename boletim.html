@@ -106,6 +106,17 @@
         .menu.active {
             left: 0;
         }
+
+        /* Estilo para a mensagem personalizada */
+        .mensagem {
+            background-color: #f4f4f9;
+            border-top: 1px solid #ddd;
+            padding: 20px;
+            font-size: 1.1rem;
+            color: #333;
+            font-style: italic;
+            margin-top: 30px;
+        }
     </style>
 </head>
 <body>
@@ -145,6 +156,10 @@
     <button onclick="gerarTabela()">Gerar Tabela</button>
     <br><br>
     <div id="tabelaNotas" class="hidden"></div>
+
+    <!-- Mensagem personalizada -->
+    <div class="mensagem">
+        Esta página foi criada com carinho pelo seu amigo FEH 💙, que deseja que você aproveite ao máximo durante o seu curso 📚. Ester, aproveite e muito obrigado por ser minha amiga 😊! Espero que essa ferramenta seja útil para você ✨🌟    </div>
 
     <!-- Script para o menu interativo -->
     <script>
@@ -247,6 +262,6 @@
 
         // Salva o nome do curso sempre que o campo de curso for alterado
         document.getElementById('curso').addEventListener('input', salvarCurso);
-    </script>
+    </script>a
 </body>
 </html>
