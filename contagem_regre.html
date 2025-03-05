@@ -50,7 +50,7 @@
             top: 80px;
             left: -250px;
             width: 250px;
-            height: auto;
+            height: calc(100% - 100px); /* Ajuste para a altura da tela */
             background: linear-gradient(135deg, #6a11cb, #2575fc);
             color: white;
             padding: 20px;
@@ -58,6 +58,7 @@
             transition: left 0.3s ease;
             z-index: 999;
             border-radius: 12px;
+            overflow-y: auto; /* Adiciona barra de rolagem vertical */
         }
 
         .menu a {
@@ -169,18 +170,14 @@
 
     <!-- Menu -->
     <div id="menu" class="menu">
-        <a href="/"><i class="fas fa-home"></i> Receitas Favoritas</a>     
-      <a href="/quis.html"><i class="fas fa-question-circle"></i> Jogos</a>     
-      <a href="/contagem_regre.html"><i class="fas fa-clock"></i> Contagem Regressiva</a>     
-      <a href="/desculpas.html"><i class="fas fa-magic"></i> Pedido de Desculpa</a>     
-      <a href="/motivos.html"><i class="fas fa-heart"></i> Motivos</a> 
-      <a href="/camera.html"><i class="fas fa-mirror"></i> Espelho</a>
-      <a href="/cofre.html"><i class="fas fa-lock"></i> Desafio do Cofre </a>
-      <a href="/premio.html"><i class="fas fa-gift"></i> Prêmio Surpresa</a>
-      <a href="/destino.html"><i class="fas fa-question-circle"></i> Jogo do Destino</a>
-
-
-
+        <a href="/"><i class="fas fa-home"></i> Receitas Favoritas</a>
+        <a href="/feedback.html"><i class="fas fa-comment"></i> Enviar Feedback</a>
+        <a href="/quis.html"><i class="fas fa-question-circle"></i> Jogos</a>
+        <a href="/contagem_regre.html"><i class="fas fa-clock"></i> Contagem Regressiva</a>
+        <a href="/desculpas.html"><i class="fas fa-magic"></i> Pedido de Desculpa</a>
+        <a href="/motivos.html"><i class="fas fa-heart"></i> Motivos</a>
+        <a href="/destino.html"><i class="fas fa-question-circle"></i> Jogo do Destino</a>
+        <a href="/boletim.html"><i class="fas fa-file-alt"></i> Boletim</a>
     </div>
 
     <!-- Conteúdo da página de contagem regressiva -->
