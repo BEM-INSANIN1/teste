@@ -114,67 +114,71 @@
             left: -250px; /* Inicialmente escondido */
             width: 250px;
             height: 100%;
-            background-color: #333;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
             color: white;
+            padding: 20px;
+            box-shadow: 4px 0 10px rgba(0, 0, 0, 0.15);
             transition: left 0.3s ease;
-            z-index: 1000;
-            padding-top: 20px;
-            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
+            z-index: 999;
+            border-radius: 12px;
+            overflow-y: auto; /* Adiciona barra de rolagem vertical */
         }
     
         .menu a {
-            padding: 10px 15px;
-            text-decoration: none;
-            color: white;
             display: block;
-            font-size: 18px;
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            padding: 12px 20px;
+            border-radius: 8px;
+            transition: background 0.3s ease;
         }
     
         .menu a:hover {
-            background-color: #575757;
+            background: rgba(255, 255, 255, 0.1);
         }
     
         /* Menu Toggle Button */
         .menu-toggle {
-            font-size: 1.5rem;
-            color: #333;
-            background-color: #fff;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            z-index: 1050;
             position: fixed;
             top: 20px;
             left: 20px;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            transition: background 0.3s ease;
         }
     
-        .menu-toggle i {
-            font-size: 1.5rem;
+        .menu-toggle:hover {
+            background: linear-gradient(135deg, #5a0eb2, #1d63e2);
         }
     </style>
-    
 </head>
 <body>
-        <!-- Botão para abrir/fechar o menu -->   
-        <button id="menu-toggle" class="menu-toggle">     
-            <i class="fas fa-bars"></i> Menu   
-        </button>    
-        
-        <!-- Menu -->   
-        <div id="menu" class="menu">     
-            <a href="/"><i class="fas fa-home"></i> Receitas Favoritas</a>     
-            <a href="/quis.html"><i class="fas fa-question-circle"></i> Jogos</a>     
-            <a href="/contagem_regre.html"><i class="fas fa-clock"></i> Contagem Regressiva</a>     
-            <a href="/desculpas.html"><i class="fas fa-magic"></i> Pedido de Desculpa</a>     
-            <a href="/motivos.html"><i class="fas fa-heart"></i> Motivos</a> 
-            <a href="/camera.html"><i class="fas fa-mirror"></i> Espelho</a>
-            <a href="/cofre.html"><i class="fas fa-lock"></i> Desafio do Cofre </a>
-            <a href="/premio.html"><i class="fas fa-gift"></i> Prêmio Surpresa</a>
-            <a href="/destino.html"><i class="fas fa-question-circle"></i> Jogo do Destino</a>
+    <!-- Botão para abrir/fechar o menu -->   
+    <button id="menu-toggle" class="menu-toggle">     
+        <i class="fas fa-bars"></i> Menu   
+    </button>    
+    
+    <!-- Menu -->   
+    <div id="menu" class="menu">     
+        <a href="/"><i class="fas fa-home"></i> Receitas Favoritas</a>     
+        <a href="/feedback.html"><i class="fas fa-comment"></i> Enviar Feedback</a>     
+        <a href="/quis.html"><i class="fas fa-question-circle"></i> Jogos</a>     
+        <a href="/contagem_regre.html"><i class="fas fa-clock"></i> Contagem Regressiva</a>     
+        <a href="/desculpas.html"><i class="fas fa-magic"></i> Pedido de Desculpa</a>     
+        <a href="/motivos.html"><i class="fas fa-heart"></i> Motivos</a>     
+        <a href="/destino.html"><i class="fas fa-question-circle"></i> Jogo do Destino</a>     
+        <a href="/boletim.html"><i class="fas fa-file-alt"></i> Boletim</a>   
+    </div>    
 
-
-
-        </div>    
     <header>
         <h1><i class="fas fa-heart"></i> 100 Motivos para Gostar de Você <i class="fas fa-heart"></i></h1>
     </header>
