@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro de Notas</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> <!-- Link para os ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -19,12 +19,13 @@
             text-align: center;
         }
         table {
-            margin: auto;
+            margin: 20px auto;
             border-collapse: collapse;
-            width: 80%;
+            width: 90%;
             background: white;
             border-radius: 8px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s ease-in-out;
         }
         th, td {
             border: 1px solid #ddd;
@@ -44,7 +45,7 @@
             border-radius: 8px;
             cursor: pointer;
             transition: all 0.3s ease;
-            margin-top: 10px;
+            margin: 10px 5px;
         }
         button:hover {
             background: linear-gradient(135deg, #5a0eb2, #1d63e2);
@@ -63,82 +64,102 @@
             box-shadow: 0 0 5px rgba(37, 117, 252, 0.5);
         }
         .hidden { display: none; }
-
-        /* Estilos para o menu */
-        .menu {
-            position: fixed;
-            top: 0;
-            left: -250px;
-            width: 250px;
-            height: 100%;
-            background: #333;
-            padding-top: 60px;
-            transition: left 0.3s ease;
-            z-index: 1000;
-            overflow-y: auto; /* Adiciona barra de rolagem vertical */
+        .selected {
+            background-color: #f0f4ff;
         }
-        .menu a {
-            display: block;
-            padding: 15px;
+        .celebrate {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3rem;
             color: white;
-            text-decoration: none;
-            font-size: 18px;
-            border-bottom: 1px solid #444;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            padding: 20px 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            animation: celebrate 2s ease-in-out, pulse 2s infinite;
+            z-index: 1000;
         }
-        .menu a:hover {
-            background: #444;
+        .aprovado {
+            background-color: #4CAF50; /* Verde */
+            color: white;
         }
-        .menu-toggle {
+        .reprovado {
+            background-color: #F44336; /* Vermelho */
+            color: white;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes celebrate {
+            0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+            100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+        }
+        @keyframes pulse {
+            0% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.1); }
+            100% { transform: translate(-50%, -50%) scale(1); }
+        }
+        @keyframes confetti-fall {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100vh); }
+        }
+        .confetti {
             position: fixed;
-            top: 20px;
-            left: 20px;
-            background: #6a11cb;
+            width: 10px;
+            height: 10px;
+            background-color: #ff0000;
+            animation: confetti-fall 2s linear infinite; /* Animação infinita */
+            top: -10px; /* Começa acima da tela */
+        }
+        .confetti:nth-child(2n) {
+            background-color: #00ff00;
+        }
+        .confetti:nth-child(3n) {
+            background-color: #0000ff;
+        }
+        .confetti:nth-child(4n) {
+            background-color: #ffff00;
+        }
+        .confetti:nth-child(5n) {
+            background-color: #ff00ff;
+        }
+        .mensagem-carinho {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            color: #6a11cb;
+            font-style: italic;
+        }
+        .botao-voltar {
+            margin-top: 20px;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
             color: white;
             border: none;
             padding: 10px 20px;
-            font-size: 16px;
+            font-size: 1rem;
+            border-radius: 8px;
             cursor: pointer;
-            z-index: 1001;
+            transition: all 0.3s ease;
         }
-        .menu-toggle:hover {
-            background: #5a0eb2;
-        }
-        .menu.active {
-            left: 0;
-        }
-
-        /* Estilo para a mensagem personalizada */
-        .mensagem {
-            background-color: #f4f4f9;
-            border-top: 1px solid #ddd;
-            padding: 20px;
-            font-size: 1.1rem;
-            color: #333;
-            font-style: italic;
-            margin-top: 30px;
+        .botao-voltar:hover {
+            background: linear-gradient(135deg, #5a0eb2, #1d63e2);
+            transform: scale(1.05);
         }
     </style>
 </head>
 <body>
-    <!-- Botão para abrir/fechar o menu -->
-    <button id="menu-toggle" class="menu-toggle">
-        <i class="fas fa-bars"></i> Menu
-    </button>
-
-    <!-- Menu -->
-    <div id="menu" class="menu">
-        <a href="/"><i class="fas fa-home"></i> Receitas Favoritas</a>
-        <a href="/feedback.html"><i class="fas fa-comment"></i> Enviar Feedback</a>
-        <a href="/quis.html"><i class="fas fa-question-circle"></i> Jogos</a>
-        <a href="/contagem_regre.html"><i class="fas fa-clock"></i> Contagem Regressiva</a>
-        <a href="/desculpas.html"><i class="fas fa-magic"></i> Pedido de Desculpa</a>
-        <a href="/motivos.html"><i class="fas fa-heart"></i> Motivos</a>
-        <a href="/destino.html"><i class="fas fa-question-circle"></i> Jogo do Destino</a>
-        <a href="/boletim.html"><i class="fas fa-file-alt"></i> Boletim</a>
-    </div>
-
-    <!-- Conteúdo do Boletim (não alterado) -->
     <h1>Registro de Notas</h1>
+    <!-- Botão de Voltar -->
+    <button class="botao-voltar" onclick="window.location.href='index.html'">
+        <i class="fas fa-arrow-left"></i> Voltar para a Página Inicial
+    </button>
+    <br><br>
+    <label for="nomeEstudante">Nome do Estudante:</label>
+    <input type="text" id="nomeEstudante" placeholder="Digite seu nome">
+    <br><br>
     <label for="curso">Nome do Curso:</label>
     <input type="text" id="curso" placeholder="Digite o curso">
     <br><br>
@@ -149,119 +170,237 @@
     </select>
     <br><br>
     <button onclick="adicionarMateria()">Adicionar Matéria</button>
-    <button onclick="editarTodasMaterias()">Editar Todas</button>
-    <button onclick="removerMateria()">Remover Matéria</button>
-    <div id="materias"></div>
-    <br>
-    <button onclick="gerarTabela()">Gerar Tabela</button>
+    <button onclick="editarMateria()">Editar Matéria</button>
+    <button onclick="excluirMaterias()">Excluir Matérias Selecionadas</button>
+    <button onclick="limparTudo()">Limpar Tudo</button>
+    <br><br>
+    <button onclick="gerarTabela()">Ver Tabela de Notas</button>
     <br><br>
     <div id="tabelaNotas" class="hidden"></div>
+    <div id="celebrateMessage" class="hidden celebrate"></div>
 
-    <!-- Mensagem personalizada -->
-    <div class="mensagem">
-        Esta página foi criada com muito carinho pelo seu amigo FEH, que deseja que você aproveite ao máximo durante o seu curso 📚. Ester, aproveite e muito obrigado por ser minha amiga ❤️😊! Espero que essa ferramenta seja útil para você ✨🌟    </div>
+    <!-- Nova mensagem de carinho -->
+    <div class="mensagem-carinho">
+        <p>Esta página foi criada com muito carinho pelo seu amigo FEH, que deseja que você aproveite ao máximo durante o seu curso 📚.</p>
+        <p>Ester, aproveite e muito obrigado por ser minha amiga ❤️😊! Espero que essa ferramenta seja útil para você ✨🌟.</p>
+    </div>
 
-    <!-- Script para o menu interativo -->
-    <script>
-        document.getElementById('menu-toggle').addEventListener('click', () => {
-            const menu = document.getElementById('menu');
-            menu.classList.toggle('active');
-        });
-    </script>
-
-    <!-- Script atualizado para incluir a validação do nome do curso -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <script>
         let materias = JSON.parse(localStorage.getItem('materias')) || [];
-        let curso = localStorage.getItem('curso') || ""; // Recupera o curso, se existir
-        document.getElementById('curso').value = curso; // Preenche o campo do curso com o valor salvo
-        atualizarListaMaterias();
+        let curso = localStorage.getItem('curso') || "";
+        let nomeEstudante = localStorage.getItem('nomeEstudante') || "";
+        document.getElementById('curso').value = curso;
+        document.getElementById('nomeEstudante').value = nomeEstudante;
 
+        // Salvar o nome do estudante no localStorage
+        function salvarNomeEstudante() {
+            let nome = document.getElementById('nomeEstudante').value;
+            localStorage.setItem('nomeEstudante', nome);
+        }
+
+        // Salvar o nome do curso no localStorage
         function salvarCurso() {
             let nomeCurso = document.getElementById('curso').value;
-            localStorage.setItem('curso', nomeCurso); // Salva o nome do curso no localStorage
+            localStorage.setItem('curso', nomeCurso);
         }
 
-        function validarCurso() {
-            let curso = document.getElementById('curso').value;
-            if (!curso.trim()) {
-                alert("Por favor, insira o nome do curso antes de prosseguir.");
-                return false;
-            }
-            return true;
-        }
-
+        // Adicionar uma nova matéria
         function adicionarMateria() {
-            if (!validarCurso()) return;
             let nomeMateria = prompt("Digite o nome da matéria:");
             if (nomeMateria) {
-                materias.push(nomeMateria);
-                salvarMaterias();
-                atualizarListaMaterias();
+                let quantidadeNotas = prompt("Quantas notas deseja adicionar para esta matéria por bimestre/semestre?");
+                quantidadeNotas = parseInt(quantidadeNotas);
+                if (!isNaN(quantidadeNotas)) {
+                    materias.push({ nome: nomeMateria, notas: [], quantidadeNotas: quantidadeNotas });
+                    localStorage.setItem('materias', JSON.stringify(materias));
+                    alert("Matéria adicionada com sucesso!");
+                    gerarTabela();
+                } else {
+                    alert("Por favor, insira um número válido para a quantidade de notas.");
+                }
             }
         }
 
-        function editarTodasMaterias() {
-            if (!validarCurso()) return;
-            materias = materias.map(materia => prompt("Editar matéria:", materia) || materia);
-            salvarMaterias();
-            atualizarListaMaterias();
-            gerarTabela();
-        }
-
-        function removerMateria() {
-            if (!validarCurso()) return;
-            if (materias.length === 0) {
-                alert("Não há matérias para remover!");
-                return;
-            }
-            let materiaParaRemover = prompt("Digite o nome da matéria que deseja remover:");
-            if (materiaParaRemover && materias.includes(materiaParaRemover)) {
-                materias = materias.filter(materia => materia !== materiaParaRemover);
-                salvarMaterias();
-                atualizarListaMaterias();
-                gerarTabela();
+        // Editar nome da matéria
+        function editarMateria() {
+            let matIndex = prompt("Digite o número da matéria que deseja editar:");
+            matIndex = parseInt(matIndex) - 1;
+            if (matIndex >= 0 && matIndex < materias.length) {
+                let novoNome = prompt("Digite o novo nome da matéria:");
+                if (novoNome) {
+                    materias[matIndex].nome = novoNome;
+                    localStorage.setItem('materias', JSON.stringify(materias));
+                    alert("Matéria editada com sucesso!");
+                    gerarTabela();
+                }
             } else {
-                alert("Matéria não encontrada!");
+                alert("Número de matéria inválido.");
             }
         }
 
-        function salvarMaterias() {
-            localStorage.setItem('materias', JSON.stringify(materias));
-        }
-
+        // Gerar a tabela de notas
         function gerarTabela() {
-            if (!validarCurso()) return;
-            if (materias.length === 0) {
-                alert("Adicione pelo menos uma matéria!");
-                return;
-            }
-
             let tipo = document.getElementById("tipo").value;
             let colunas = tipo === "bimestre" ? 4 : 2;
 
-            let tabelaHTML = "<table><tr><th>Matéria</th>";
+            let tabelaHTML = "<table><tr><th>Selecionar</th><th>Matéria</th>";
             for (let i = 1; i <= colunas; i++) {
                 tabelaHTML += `<th>${tipo === 'bimestre' ? 'Bimestre' : 'Semestre'} ${i}</th>`;
             }
-            tabelaHTML += "<th>Média</th><th>Status</th></tr>";
+            tabelaHTML += "<th>Média Final</th><th>Status</th></tr>";
 
             materias.forEach((materia, matIndex) => {
-                tabelaHTML += `<tr><td>${materia}</td>`;
-                let notasInputs = [];
+                tabelaHTML += `<tr onclick="selecionarMateria(${matIndex})" id="materia-${matIndex}"><td><input type='checkbox' id='check-${matIndex}'></td><td>${materia.nome}</td>`;
                 for (let i = 0; i < colunas; i++) {
-                    notasInputs.push(`<input type='number' min='0' max='10' step='0.1' class='nota' data-materia='${matIndex}' data-periodo='${i}' onchange='calcularMedia(${matIndex})'>`);
+                    tabelaHTML += `<td>`;
+                    for (let j = 0; j < materia.quantidadeNotas; j++) {
+                        let notaSalva = materia.notas[i] ? materia.notas[i][j] || "" : "";
+                        tabelaHTML += `<input type='number' min='0' max='10' step='0.1' class='nota' data-materia='${matIndex}' data-periodo='${i}' data-indice='${j}' onchange='salvarNota(${matIndex}, ${i}, ${j}, this.value)' placeholder='Nota ${j + 1}' value='${notaSalva}'><br>`;
+                    }
+                    tabelaHTML += `Média: <span id='media-periodo-${matIndex}-${i}'>-</span></td>`;
                 }
-                tabelaHTML += notasInputs.map(input => `<td>${input}</td>`).join('');
-                tabelaHTML += `<td id='media-${matIndex}'>-</td><td id='status-${matIndex}'>-</td></tr>`;
+                tabelaHTML += `<td id='media-final-${matIndex}'>-</td><td id='status-${matIndex}'>-</td></tr>`;
             });
-
             tabelaHTML += "</table>";
             document.getElementById("tabelaNotas").innerHTML = tabelaHTML;
             document.getElementById("tabelaNotas").classList.remove("hidden");
+
+            // Recalcular médias ao gerar a tabela
+            materias.forEach((materia, matIndex) => {
+                for (let i = 0; i < colunas; i++) {
+                    calcularMediaPeriodo(matIndex, i);
+                }
+                calcularMediaFinal(matIndex);
+            });
         }
 
-        // Salva o nome do curso sempre que o campo de curso for alterado
-        document.getElementById('curso').addEventListener('input', salvarCurso);
-    </script>a
+        // Selecionar matéria
+        function selecionarMateria(matIndex) {
+            let row = document.getElementById(`materia-${matIndex}`);
+            row.classList.toggle("selected");
+        }
+
+        // Excluir matérias selecionadas
+        function excluirMaterias() {
+            let checkboxes = document.querySelectorAll("input[type='checkbox']:checked");
+            checkboxes.forEach(checkbox => {
+                let matIndex = checkbox.id.split("-")[1];
+                materias.splice(matIndex, 1);
+            });
+            localStorage.setItem('materias', JSON.stringify(materias));
+            gerarTabela();
+            alert("Matérias excluídas com sucesso!");
+        }
+
+        // Limpar tudo (matérias e curso)
+        function limparTudo() {
+            if (confirm("Tem certeza que deseja limpar tudo?")) {
+                localStorage.removeItem('materias');
+                localStorage.removeItem('curso');
+                localStorage.removeItem('nomeEstudante');
+                materias = [];
+                document.getElementById('curso').value = "";
+                document.getElementById('nomeEstudante').value = "";
+                gerarTabela();
+                alert("Tudo foi limpo com sucesso!");
+            }
+        }
+
+        // Salvar nota
+        function salvarNota(matIndex, periodo, indice, valor) {
+            if (!materias[matIndex].notas[periodo]) {
+                materias[matIndex].notas[periodo] = [];
+            }
+            materias[matIndex].notas[periodo][indice] = parseFloat(valor) || 0;
+            localStorage.setItem('materias', JSON.stringify(materias));
+            calcularMediaPeriodo(matIndex, periodo);
+            calcularMediaFinal(matIndex);
+            verificarAprovacaoGeral();
+        }
+
+        // Calcular média do período (bimestre/semestre)
+        function calcularMediaPeriodo(matIndex, periodo) {
+            let notas = materias[matIndex].notas[periodo] || [];
+            let media = notas.length > 0 ? (notas.reduce((a, b) => a + b, 0) / notas.length).toFixed(2) : "-";
+            document.getElementById(`media-periodo-${matIndex}-${periodo}`).textContent = media;
+        }
+
+        // Calcular média final da matéria
+        function calcularMediaFinal(matIndex) {
+            let tipo = document.getElementById("tipo").value;
+            let colunas = tipo === "bimestre" ? 4 : 2;
+            let medias = [];
+            for (let i = 0; i < colunas; i++) {
+                let mediaPeriodo = document.getElementById(`media-periodo-${matIndex}-${i}`).textContent;
+                if (mediaPeriodo !== "-") medias.push(parseFloat(mediaPeriodo));
+            }
+            let mediaFinal = medias.length > 0 ? (medias.reduce((a, b) => a + b, 0) / medias.length).toFixed(2) : "-";
+            document.getElementById(`media-final-${matIndex}`).textContent = mediaFinal;
+            // Verificar se a média final é maior ou igual a 7 para aprovação
+            let statusCell = document.getElementById(`status-${matIndex}`);
+            if (mediaFinal >= 7) {
+                statusCell.textContent = "Aprovado";
+                statusCell.className = "aprovado";
+            } else {
+                statusCell.textContent = "Reprovado";
+                statusCell.className = "reprovado";
+            }
+        }
+
+        // Verificar se o estudante foi aprovado em todas as matérias
+        function verificarAprovacaoGeral() {
+            let todasAprovadas = materias.every((materia, matIndex) => {
+                let mediaFinal = document.getElementById(`media-final-${matIndex}`).textContent;
+                return mediaFinal >= 7;
+            });
+            if (todasAprovadas && materias.length > 0) {
+                let nome = document.getElementById('nomeEstudante').value || "Estudante";
+                document.getElementById('celebrateMessage').innerHTML = `🎉 Parabéns, ${nome}! Você passou de ano! 🎉`;
+                document.getElementById('celebrateMessage').classList.remove("hidden");
+
+                // Disparar confetes com duração de 15 segundos
+                confetti({
+                    particleCount: 300,  // Mais partículas para um efeito mais denso
+                    spread: 180,  // Aumentando a dispersão para cobrir mais a tela
+                    origin: { y: 0 },  // Confetes começam do topo (y = 0)
+                    colors: ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'],
+                    gravity: 0.5,  // Confetes mais rápidos
+                    ticks: 150,  // Reduzido para acelerar a animação
+                    duration: 15000  // Agora, os confetes durarão 15 segundos
+                });
+
+                // Criar confetes personalizados
+                criarConfetes();
+
+                // Parar a animação após 10 segundos
+                setTimeout(() => {
+                    document.querySelectorAll('.confetti').forEach(confetti => {
+                        confetti.style.animation = 'none'; // Para a animação
+                        confetti.remove(); // Remove os confetes do DOM
+                    });
+                }, 10000); // 10 segundos
+
+                // Esconder a mensagem após 10 segundos
+                setTimeout(() => {
+                    document.getElementById('celebrateMessage').classList.add("hidden");
+                }, 10000); // 10 segundos
+            } else {
+                document.getElementById('celebrateMessage').classList.add("hidden");
+            }
+        }
+
+        // Função para criar confetes personalizados
+        function criarConfetes() {
+            for (let i = 0; i < 200; i++) { // Aumentei o número de confetes para 200
+                let confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + 'vw'; // Distribui os confetes por toda a largura da tela
+                confetti.style.animationDelay = Math.random() * 5 + 's'; // Atraso aleatório para um efeito mais natural
+                confetti.style.animationDuration = (Math.random() * 2 + 2) + 's'; // Duração variável entre 2 e 4 segundos
+                document.body.appendChild(confetti);
+            }
+        }
+    </script>
 </body>
 </html>
