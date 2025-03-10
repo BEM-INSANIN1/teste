@@ -1,80 +1,154 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mensagem de Perdão</title>
+    <title>🔮 Oráculo da Amizade 🔮</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            text-align: center;
+            background: linear-gradient(135deg, #ff80ab, #ff4081);
+            color: white;
+            padding: 20px;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            margin: 0;
         }
+
         .container {
-            text-align: center;
-        }
-        .card {
             background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
             max-width: 400px;
+            width: 100%;
             text-align: center;
-            opacity: 0;
-            transform: scale(0.8);
-            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+            transition: 0.3s;
         }
-        .card.show {
-            opacity: 1;
-            transform: scale(1);
-        }
+
         h2 {
-            color: #333;
+            color: #e91e63;
+            margin-bottom: 15px;
         }
+
         p {
-            color: #555;
-            line-height: 1.5;
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 16px;
         }
-        .heart {
-            color: red;
-            font-size: 24px;
+
+        input, button {
+            font-size: 16px;
+            padding: 10px;
+            width: 100%;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            margin-top: 10px;
         }
-        .reveal-button {
-            background-color: #007bff;
+
+        input {
+            text-align: center;
+        }
+
+        button {
+            background-color: #e91e63;
             color: white;
             border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
             cursor: pointer;
-            font-size: 16px;
-            margin-top: 20px;
-            transition: background 0.3s;
+            transition: 0.3s;
+            font-weight: bold;
         }
-        .reveal-button:hover {
-            background-color: #0056b3;
+
+        button:hover {
+            background-color: #c2185b;
+        }
+
+        .mensagem {
+            font-size: 18px;
+            margin-top: 20px;
+            font-weight: bold;
+            color: #333;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .erro {
+            color: red;
+            font-weight: bold;
+        }
+
+        .fade-in {
+            opacity: 1 !important;
+        }
+
+        .voltar {
+            margin-top: 20px;
+            background-color: #ccc;
+            color: black;
+        }
+
+        .voltar:hover {
+            background-color: #999;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <button class="reveal-button" onclick="revealMessage()">Revelar Carta</button>
-        <div class="card" id="messageCard">
-            <h2>Querida Ester,</h2>
-            <p>Desculpa por tudo que causei a você. Sei que fui um péssimo amigo e me arrependo profundamente por qualquer dor ou decepção que tenha te feito passar. Nunca foi minha intenção te magoar, mas reconheço que minhas atitudes não foram as melhores.</p>
-            <p>Você é uma pessoa incrível, e eu realmente valorizo nossa amizade. Sinto muito por não ter sido o amigo que você merecia. Sei que errei e que, de alguma forma, te machuquei. Você merece amigos muito melhores do que eu fui.</p>
-            <p>Mas como não posso mudar o passado, só posso te prometer que quero ser uma pessoa melhor daqui para frente. Espero, de coração, ter a chance de reconstruir nossa amizade e mostrar o quanto você é importante para mim.</p>
-            <p>Independente de qualquer coisa, quero que saiba que estarei sempre aqui para você. <span class="heart">❤</span></p>
-            <h3>Me perdoa?</h3>
-        </div>
+    <div class="container" id="login-container">
+        <h2>🔮 Oráculo da Amizade 🔮</h2>
+        <p>Digite seu nome para acessar:</p>
+        <input type="text" id="nome" placeholder="Digite seu nome">
+        <button onclick="verificarUsuario()">Entrar</button>
+        <p class="erro" id="erro-msg"></p>
     </div>
     
+    <div class="container" id="oraculo-container" style="display: none;">
+        <h2>🔮 Oráculo da Amizade 🔮</h2>
+        <p>Clique no botão para receber uma mensagem especial!</p>
+        <button onclick="mostrarMensagem()">Consultar o Oráculo</button>
+        <p class="mensagem" id="mensagem"></p>
+        <button class="voltar" onclick="voltarPagina()">Voltar</button>
+    </div>
+
     <script>
-        function revealMessage() {
-            document.getElementById("messageCard").classList.add("show");
+        function verificarUsuario() {
+            const nome = document.getElementById("nome").value.trim().toLowerCase();
+            const loginContainer = document.getElementById("login-container");
+            const oraculoContainer = document.getElementById("oraculo-container");
+            const erroMsg = document.getElementById("erro-msg");
+
+            if (nome === "ester") {
+                loginContainer.style.display = "none";
+                oraculoContainer.style.display = "block";
+            } else {
+                erroMsg.textContent = "🚫 Esse presente nunca será seu! 🚫";
+            }
+        }
+
+        function mostrarMensagem() {
+            const mensagens = [
+                "Ester, você é minha melhor amiga e minha pessoa favorita! 💖",
+                "Feh e Ester, uma amizade que nem o tempo pode apagar! ⏳✨",
+                "Se tem uma coisa que eu sei, é que nossa amizade é para sempre! 🌟",
+                "Ester, eu sempre estarei aqui para você, não importa o que aconteça! 🤗",
+                "Nossa amizade é como um abraço quentinho no coração! 🤗💕",
+                "Amizades verdadeiras são raras, e a nossa é a melhor de todas! 🥰",
+            ];
+
+            const mensagem = document.getElementById("mensagem");
+            mensagem.textContent = mensagens[Math.floor(Math.random() * mensagens.length)];
+            mensagem.classList.add("fade-in");
+        }
+
+        function voltarPagina() {
+            window.location.href = "index.html"; // Redireciona para a página inicial
         }
     </script>
 </body>
